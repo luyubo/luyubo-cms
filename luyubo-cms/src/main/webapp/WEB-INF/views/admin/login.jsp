@@ -12,7 +12,7 @@
 	<div class="container-fluid">
 		<div class="col-md-4 offset-4" style="margin-top: 100px;">
 			<h3>CMS登录页面</h3>
-			<form>
+			<form action="/admin/home">
 			  <div class="form-group">
 			    <label for="exampleInputEmail1">用户名</label>
 			    <input type="email" class="form-control" placeholder="请输入用户名...">

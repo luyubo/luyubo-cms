@@ -14,4 +14,14 @@ public class AdminController {
 	public String login() {
 		return "admin/login";
 	}
+	
+	@RequestMapping("/home")
+	public String home() {
+		return "admin/home";
+	}
+	
+	@RequestMapping("/user")
+	public String user() {
+		return "admin/user";
+	}
 }
