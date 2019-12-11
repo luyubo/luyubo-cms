@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luyubo.cms.dao.UserDao">
+	<select id="select" resultType="User">
+		select * from cms_user
+	</select>
+	
+	<select id="selectById" resultType="User">
+		select * from cms_user where id=#{id}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count from cms_user
+	</select>
+	
+	<insert id="insert">
+		insert into cms_user(username,password)
+		values(#{user.username},#{user.password})
+	</insert>
+	
+	<update id="update">
+		update cms_user set 
+		username=#{user.usernmae},
+		password=#{user.password}
+		where id=#{user.id}
+	</update>
+	
+	<delete id="deleteById">
+		delete from cms_user where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from cms_user where id in(${id})
+	</delete>
+</mapper>
