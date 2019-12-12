@@ -1,10 +1,17 @@
 package com.luyubo.cms.pojo;
+
+import java.io.Serializable;
+
 /**
  * 文章标签关联实体类
  * @author 77028
  *
  */
-public class ArticleTag {
+public class ArticleTag implements Serializable{
+	/**
+	 * 序列化版本号
+	 */
+	private static final long serialVersionUID=1L;
 	private Integer aid;
 	private Integer tid;
 	public Integer getAid() {

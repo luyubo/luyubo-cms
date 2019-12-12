@@ -1,10 +1,17 @@
 package com.luyubo.cms.pojo;
+
+import java.io.Serializable;
+
 /**
  * 投票表
  * @author 77028
  *
  */
-public class ArticleVote {
+public class ArticleVote implements Serializable{
+	/**
+	 * 序列化版本号
+	 */
+	private static final long serialVersionUID=1L;
 	private Integer id;
 	private Integer article_id;
 	private Integer user_id;

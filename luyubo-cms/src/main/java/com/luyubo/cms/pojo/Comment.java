@@ -1,11 +1,17 @@
 package com.luyubo.cms.pojo;
 
+import java.io.Serializable;
+
 /**
  * 文章评论表
  * @author 77028
  *
  */
-public class Comment {
+public class Comment implements Serializable{
+	/**
+	 * 序列化版本号
+	 */
+	private static final long serialVersionUID=1L;
 	private Integer id;
 	private Integer articleId;
 	private Integer userId;

@@ -24,4 +24,19 @@ public class AdminController {
 	public String user() {
 		return "admin/user";
 	}
+	
+	@RequestMapping("/settings")
+	public String settings() {
+		return "admin/settings";
+	}
+	
+	@RequestMapping("/welcome")
+	public String welcome() {
+		return "admin/welcome";
+	}
+	
+	@RequestMapping("/article")
+	public String article() {
+		return "admin/article";
+	}
 }

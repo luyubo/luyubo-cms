@@ -1,12 +1,17 @@
 package com.luyubo.cms.pojo;
 
+import java.io.Serializable;
 import java.sql.Date;
 /**
  * 文章实体类
  * @author 77028
  *
  */
-public class Article {
+public class Article implements Serializable{
+	/**
+	 * 序列化版本号
+	 */
+	private static final long serialVersionUID=1L;
 	private Integer id;
 	private String title;
 	private String content;

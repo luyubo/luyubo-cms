@@ -1,12 +1,18 @@
 package com.luyubo.cms.pojo;
 
+import java.io.Serializable;
+
 /**
  * 轮播图表
  * 
  * @author 77028
  *
  */
-public class Slide {
+public class Slide implements Serializable{
+	/**
+	 * 序列化版本号
+	 */
+	private static final long serialVersionUID=1L;
 	private Integer id;
 	private String title;
 	private String picture;

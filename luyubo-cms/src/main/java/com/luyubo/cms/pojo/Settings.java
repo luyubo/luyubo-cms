@@ -1,11 +1,17 @@
 package com.luyubo.cms.pojo;
 
+import java.io.Serializable;
+
 /**
  * 系统设置表
  * @author 77028
  *
  */
-public class Settings {
+public class Settings implements Serializable{
+	/**
+	 * 序列化版本号
+	 */
+	private static final long serialVersionUID=1L;
 	private Integer id;
 	private String site_domain;
 	private String site_name;

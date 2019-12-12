@@ -1,11 +1,17 @@
 package com.luyubo.cms.pojo;
 
+import java.io.Serializable;
+
 /**
  * 分类表
  * @author 77028
  *
  */
-public class Category {
+public class Category implements Serializable{
+	/**
+	 * 序列化版本号
+	 */
+	private static final long serialVersionUID=1L;
 	private Integer id;
 	private String name;
 	private Integer channel_id;

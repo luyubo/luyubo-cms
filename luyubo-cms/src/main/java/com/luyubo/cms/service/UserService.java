@@ -40,4 +40,6 @@ public interface UserService {
 	 * @return
 	 */
 	int addScore(Integer userId,int score);
+	
+	
 }

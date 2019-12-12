@@ -1,12 +1,18 @@
 package com.luyubo.cms.pojo;
 
+import java.io.Serializable;
+
 /**
  * 标签表
  * 
  * @author 77028
  *
  */
-public class Tag {
+public class Tag implements Serializable{
+	/**
+	 * 序列化版本号
+	 */
+	private static final long serialVersionUID=1L;
 	private Integer id;
 	private String tagname;
 	public Integer getId() {
