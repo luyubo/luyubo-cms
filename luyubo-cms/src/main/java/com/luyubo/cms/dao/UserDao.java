@@ -57,4 +57,19 @@ public interface UserDao {
 	 * @return
 	 */
 	int deleteByIds(@Param("ids") String ids);
+	
+	/**
+	 * 改变用户使用情况
+	 * @param userId
+	 * @param i
+	 * @return
+	 */
+	int updateLocked(@Param("userId")Integer userId, @Param("locked")int locked);
+	
+	/**
+	 * 登录
+	 * @param user
+	 * @return
+	 */
+	List<User> login(User user);
 }

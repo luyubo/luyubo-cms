@@ -1,7 +1,15 @@
 package com.luyubo.cms.controller.admin;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageInfo;
+import com.luyubo.cms.pojo.User;
+import com.luyubo.cms.service.UserService;
 /**
  * User控制器
  * @author 77028
@@ -10,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping("/")
 	public String login() {
 		return "admin/login";
@@ -20,9 +31,44 @@ public class AdminController {
 		return "admin/home";
 	}
 	
+	/**
+	 * 后台管理首页
+	 * @param user
+	 * @param m
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
 	@RequestMapping("/user")
-	public String user() {
+	public String user(User user,Model m,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+					@RequestParam(value = "pageSize",defaultValue = "3")Integer pageSize) {
+			PageInfo<User> pageInfo=userService.getPageInfo(user,pageNum,pageSize);
+			m.addAttribute("pageInfo", pageInfo);
 		return "admin/user";
+	}
+	
+	/**
+	 * 启用状态
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping("/user/locked")
+	@ResponseBody
+	public boolean locked(Integer userId) {
+		boolean locked=userService.locked(userId);
+		return locked;
+	}
+	
+	/**
+	 * 禁用状态
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping("/user/unLocked")
+	@ResponseBody
+	public boolean unLocked(Integer userId) {
+		boolean locked=userService.unLocked(userId);
+		return locked;
 	}
 	
 	@RequestMapping("/settings")

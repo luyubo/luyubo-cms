@@ -1,5 +1,6 @@
 package com.luyubo.cms.service;
 
+import com.github.pagehelper.PageInfo;
 import com.luyubo.cms.pojo.User;
 
 public interface UserService {
@@ -20,18 +21,16 @@ public interface UserService {
 	/**
 	 * 加锁
 	 * @param userId
-	 * @param locked
 	 * @return
 	 */
-	boolean locked(Integer userId,int locked);
+	boolean locked(Integer userId);
 	
 	/**
 	 * 解锁
 	 * @param userId
-	 * @param locked
 	 * @return
 	 */
-	boolean unLocked(Integer userId,int locked);
+	boolean unLocked(Integer userId);
 	
 	/**
 	 * 给用户添加积分,返回用户积分
@@ -40,6 +39,22 @@ public interface UserService {
 	 * @return
 	 */
 	int addScore(Integer userId,int score);
+
+	/**
+	 * 查询分页
+	 * @param user
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	public PageInfo<User> getPageInfo(User user, Integer pageNum, Integer pageSize);
+
+	/**
+	 * 登录
+	 * @param user
+	 * @return
+	 */
+	public boolean login(User user);
 	
 	
 }
