@@ -25,7 +25,7 @@
 	<mvc:annotation-driven />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/admin1/**"/>
+			<mvc:mapping path="/admin/**"/>
 			<mvc:exclude-mapping path="/admin/"/>
 			<mvc:exclude-mapping path="/admin/user/login"/>
 			<bean class="com.luyubo.cms.common.AuthInterceptor"></bean>

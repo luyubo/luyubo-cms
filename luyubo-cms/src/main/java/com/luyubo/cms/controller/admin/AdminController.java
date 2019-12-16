@@ -71,11 +71,6 @@ public class AdminController {
 		return locked;
 	}
 	
-	@RequestMapping("/settings")
-	public String settings() {
-		return "admin/settings";
-	}
-	
 	@RequestMapping("/welcome")
 	public String welcome() {
 		return "admin/welcome";
