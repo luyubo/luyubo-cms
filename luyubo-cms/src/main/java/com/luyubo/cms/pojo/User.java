@@ -122,5 +122,9 @@ public class User implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	//判断是否是管理员
+	public boolean isAdmin() {
+    	return "1".equals(getRole());
+    }
 
 }

@@ -14,6 +14,10 @@
 		</where>
 	</select>
 	
+	<select id="getByUsername" resultType="User">
+		select * from cms_user where username=#{username}
+	</select>
+	
 	<select id="login" resultType="User">
 		select * from cms_user
 		<where>
@@ -31,7 +35,7 @@
 	</select>
 	
 	<select id="count" resultType="int">
-		select count from cms_user
+		select count(1) from cms_user
 	</select>
 	
 	<insert id="insert">

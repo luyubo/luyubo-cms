@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luyubo.cms.dao.SettingsDao">
 	<select id="select" resultType="Settings">
-		select * from cms_settings
+		select id,site_domain siteDomain, site_name siteName, article_list_size articleListSize, 
+	      slide_size slideSize, admin_username adminUsername, admin_password adminPassword 
+	     from cms_settings
 	</select>
 	
 	<select id="selectById" resultType="Settings">
@@ -10,7 +12,7 @@
 	</select>
 	
 	<select id="count" resultType="int">
-		select count from cms_settings
+		select count(1) from cms_settings
 	</select>
 	
 	<insert id="insert">

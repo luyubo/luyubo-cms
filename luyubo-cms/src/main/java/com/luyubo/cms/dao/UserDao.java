@@ -72,4 +72,11 @@ public interface UserDao {
 	 * @return
 	 */
 	List<User> login(User user);
+	
+	/**
+	 * 登录根据姓名查询
+	 * @param username
+	 * @return
+	 */
+	User getByUsername(@Param("username")String username);
 }

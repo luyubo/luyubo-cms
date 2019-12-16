@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="count" resultType="int">
-		select count from cms_slide
+		select count(1) from cms_slide
 	</select>
 	
 	<insert id="insert">

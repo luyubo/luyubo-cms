@@ -3,7 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luyubo.cms.dao.ArticleDao">
 	 <select id="select" resultType="Article">
-		select * from cms_article
+		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId,channel.name channelName,cate.name categoryName
+		from cms_article article,cms_channel channel,cms_category cate
+		WHERE article.channel_id=channel.id AND article.category_id=cate.id
 	</select>
 	
 	<select id="selectById" resultType="Article">
@@ -11,7 +13,7 @@
 	</select>
 	
 	<select id="count" resultType="int">
-		select count from cms_article
+		select count(1) from cms_article
 	</select>
 	
 	<insert id="insert" parameterType="com.luyubo.cms.pojo.Article">
