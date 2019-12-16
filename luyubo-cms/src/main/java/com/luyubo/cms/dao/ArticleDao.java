@@ -24,7 +24,7 @@ public interface ArticleDao {
 	 * @param user
 	 * @return
 	 */
-	List<Article> select(@Param("user") Article article);
+	List<Article> select(@Param("article") Article article);
 	/**
 	 * 查询多少条
 	 * @param user
@@ -59,4 +59,19 @@ public interface ArticleDao {
 	 * @return
 	 */
 	int deleteByIds(@Param("ids") String ids);
+	
+	/**
+	 * 修改状态
+	 * @param id
+	 * @param status
+	 * @return
+	 */
+	int updateStatus(@Param("id")Integer id, @Param("status")Integer status);
+	
+	/**
+	 * 加热
+	 * @param id
+	 * @return
+	 */
+	int addHot(@Param("id")Integer id);
 }

@@ -1,5 +1,7 @@
 package com.luyubo.cms.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
+import com.luyubo.cms.pojo.Article;
+import com.luyubo.cms.pojo.Channel;
 import com.luyubo.cms.pojo.User;
+import com.luyubo.cms.service.ArticleService;
 import com.luyubo.cms.service.UserService;
 /**
  * User控制器
@@ -20,6 +25,9 @@ import com.luyubo.cms.service.UserService;
 public class AdminController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ArticleService articleService;
 	
 	@RequestMapping("/")
 	public String login() {
@@ -76,8 +84,43 @@ public class AdminController {
 		return "admin/welcome";
 	}
 	
+	/**
+	 * 文章管理
+	 * @param article
+	 * @param m
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
 	@RequestMapping("/article")
-	public String article() {
+	public String article(Article article,Model m,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+			@RequestParam(value = "pageSize",defaultValue = "3")Integer pageSize) {
+		PageInfo<Article> pageInfo=articleService.getPageInfo(article,pageNum,pageSize);
+		m.addAttribute("pageInfo", pageInfo);
+		List<Channel> channelList = articleService.getChannelList();
+		m.addAttribute("channelList", channelList);
 		return "admin/article";
+	}
+	
+	/**
+	 * 修改文章状态
+	 * @param article
+	 * @return
+	 */
+	@RequestMapping("/article/update/status")
+	@ResponseBody
+	public boolean updateArticleStatus(Article article) {
+		return articleService.updateStatus(article.getId(),article.getStatus());
+	}
+	
+	/**
+	 * 文章加热
+	 * @param article
+	 * @return
+	 */
+	@RequestMapping("/article/addHot")
+	@ResponseBody
+	public boolean addHot(Article article) {
+		return articleService.addHot(article.getId());
 	}
 }
