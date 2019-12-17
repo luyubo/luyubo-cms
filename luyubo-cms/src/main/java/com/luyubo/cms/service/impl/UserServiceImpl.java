@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bawei.commons.utils.Md5Util;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.luyubo.cms.common.CmsMd5Util;
@@ -63,6 +62,12 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		List<User> userList=userDao.login(user);
 		return userList.size()>0;
+	}
+
+	@Override
+	public boolean update(User user) {
+		// TODO Auto-generated method stub
+		return userDao.updateUser(user)>0;
 	}
 
 }

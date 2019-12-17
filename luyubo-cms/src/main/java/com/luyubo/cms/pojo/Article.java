@@ -1,9 +1,8 @@
 package com.luyubo.cms.pojo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
-import com.github.pagehelper.PageInfo;
 /**
  * 文章实体类
  * @author 77028
@@ -42,17 +41,40 @@ public class Article implements Serializable{
 
     private Date updated;
 
-    private String commentcnt;
+    private int commentcnt;
 
     private String content;
     
-    @Override
+    private String statusIds;
+    
+	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", picture=" + picture + ", channelId=" + channelId
-				+ ", categoryId=" + categoryId + ", userId=" + userId + ", hits=" + hits + ", hot=" + hot + ", status="
-				+ status + ", deleted=" + deleted + ", created=" + created + ", updated=" + updated + ", commentcnt="
-				+ commentcnt + ", content=" + content + "]";
+				+ ", categoryId=" + categoryId + ", channelName=" + channelName + ", categoryName=" + categoryName
+				+ ", userId=" + userId + ", hits=" + hits + ", hot=" + hot + ", status=" + status + ", deleted="
+				+ deleted + ", created=" + created + ", updated=" + updated + ", commentcnt=" + commentcnt
+				+ ", content=" + content + ", statusIds=" + statusIds + "]";
 	}
+
+
+
+	public String getStatusIds() {
+		return statusIds;
+	}
+
+
+
+	public void setStatusIds(String statusIds) {
+		this.statusIds = statusIds;
+	}
+
+
+
+	public void setCommentcnt(int commentcnt) {
+		this.commentcnt = commentcnt;
+	}
+
+
 
 	public Integer getId() {
         return id;
@@ -165,16 +187,11 @@ public class Article implements Serializable{
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
+    public int getCommentcnt() {
+		return commentcnt;
+	}
 
-    public String getCommentcnt() {
-        return commentcnt;
-    }
-
-    public void setCommentcnt(String commentcnt) {
-        this.commentcnt = commentcnt == null ? null : commentcnt.trim();
-    }
-
-    public String getContent() {
+	public String getContent() {
         return content;
     }
 

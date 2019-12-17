@@ -72,9 +72,18 @@
 	      score = #{user.score},
 	      role = #{user.role},
 	      url = #{user.url},
-	      create_time = #{user.createTime},
-	      update_time = #{user.updateTime}
+	      create_time = #{user.create_time},
+	      update_time = #{user.update_time}
 	    where id = #{user.id}
+	</update>
+	
+	<update id="updateUser">
+		update cms_user
+	    set nickname = #{user.nickname},
+	      birthday = #{user.birthday},
+	      gender = #{user.gender},
+	       url = #{user.url}
+	       where id=#{user.id}
 	</update>
 	
 	<delete id="deleteById">

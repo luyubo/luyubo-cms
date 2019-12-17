@@ -86,4 +86,11 @@ public interface UserDao {
 	 * @return
 	 */
 	int register(@Param("user")User user);
+	
+	/**
+	 * 修改设置
+	 * @param user
+	 * @return
+	 */
+	int updateUser(@Param("user")User user);
 }

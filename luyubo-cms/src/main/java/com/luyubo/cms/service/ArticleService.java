@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.luyubo.cms.pojo.Article;
+import com.luyubo.cms.pojo.Category;
 import com.luyubo.cms.pojo.Channel;
 
 /**
@@ -12,7 +13,7 @@ import com.luyubo.cms.pojo.Channel;
  *
  */
 public interface ArticleService {
-
+	
 	/**
 	 * 查询频道列表
 	 * @return
@@ -42,5 +43,27 @@ public interface ArticleService {
 	 * @return
 	 */
 	boolean addHot(Integer id);
+
+	/**
+	 * 根据id查询分类列表
+	 * @param channelId
+	 * @return
+	 */
+	List<Category> getCateListByChannelId(Integer channelId);
+
+	/**
+	 * 根据id查询
+	 * @param i
+	 * @return
+	 */
+	Article selectById(int id);
+
+	/**
+	 * 保存到数据库
+	 * @param article
+	 * @return
+	 */
+	boolean save(Article article);
+
 
 }

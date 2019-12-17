@@ -5,6 +5,10 @@
 		select * from cms_category
 	</select>
 	
+	<select id="getCateListByChannelId" resultType="Category">
+		select * from cms_category where channel_id=#{channelId}
+	</select>
+	
 	<select id="selectById" resultType="Category">
 		select * from cms_category where id=#{id}
 	</select>

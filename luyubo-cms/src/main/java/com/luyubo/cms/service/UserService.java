@@ -55,6 +55,12 @@ public interface UserService {
 	 * @return
 	 */
 	public boolean login(User user);
+
+	/**
+	 * 修改用户信息
+	 * @param user
+	 */
+	boolean update(User user);
 	
 	
 }

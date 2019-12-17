@@ -134,10 +134,28 @@ public class UserController {
 		return "user/center";
 	}
 	
-	
-	@RequestMapping("settings")
-	public String settings(HttpServletResponse response,HttpSession session) {
+	/**
+	 * 设置用户信息
+	 */
+	@RequestMapping(value = "settings",method = RequestMethod.GET)
+	public String settings(HttpServletResponse response,HttpSession session,Model m) {
+		User userInfoUser=(User) session.getAttribute(CmsConstant.UserSessionKey);
+		User user=userService.getByUsername(userInfoUser.getUsername());
+		m.addAttribute("user", user);
 		return "user/settings";
+	}
+	
+	/**
+	 * 保存用户设置
+	 * @param response
+	 * @param m
+	 * @return
+	 */
+	@RequestMapping(value = "settings",method = RequestMethod.POST)
+	@ResponseBody
+	public Object settings(User user) {
+		userService.update(user);
+		return JsonResult.success();
 	}
 	
 	@RequestMapping("comment")
