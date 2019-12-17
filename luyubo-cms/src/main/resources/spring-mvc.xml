@@ -28,7 +28,13 @@
 			<mvc:mapping path="/admin/**"/>
 			<mvc:exclude-mapping path="/admin/"/>
 			<mvc:exclude-mapping path="/admin/user/login"/>
-			<bean class="com.luyubo.cms.common.AuthInterceptor"></bean>
+			<bean class="com.luyubo.cms.common.AuthAdminInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**"/>
+			<mvc:exclude-mapping path="/user/login"/>
+			<mvc:exclude-mapping path="/user/register"/>
+			<bean class="com.luyubo.cms.common.AuthUserInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- 文件上传的处理类 -->

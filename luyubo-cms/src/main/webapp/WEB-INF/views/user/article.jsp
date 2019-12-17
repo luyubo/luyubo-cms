@@ -56,9 +56,10 @@
 	      <td>${item.status==1?"已审核":item.status==0?"未审核":"审核未通过"}</td>
 	      <td><fmt:formatDate value="${item.created }" pattern="yyyy-MM-dd HH:mm"/></td>
 	      <td>
-	      	<button type="button" class="btn btn-primary" onclick="check('${item.id}')">审核</button>
-	      	<button type="button" class="btn btn-primary" onclick="addHot('${item.id}')">加热</button>
-	      	<button type="button" class="btn btn-primary" onclick="view('${item.id}')">查看</button>
+	      	<c:if test="${item.status==2 }">
+	      		<button type="button" class="btn btn-primary" onclick="edit('${item.id}')">编辑</button>
+	      	</c:if>
+	      		<button type="button" class="btn btn-primary" onclick="view('${item.id}')">查看</button>
 	      </td>
 	    </tr>
    	</c:forEach>
@@ -107,8 +108,8 @@ function query(){
 	reload(params);
 }
 
-function add(){
-	openPage("/article/add?content1=content");
+function edit(id){
+	openPage("/article/add?id="+id);
 }
 
 function gotoPage(pageNo){
@@ -116,30 +117,7 @@ function gotoPage(pageNo){
 	query();
 }
 
-function addHot(id){
-	$.post("/admin/article/addHot",{id:id},function(res){
-		reload();
-	});
-}
-
-function check(id){
-	$('#checkModal').modal('show');
-	$('#checkForm #id').val(id);
-}
-
-function toCheck(){
-	var data = $('#checkForm').serialize();
-	console.log("data:"+data);
-	$.post("/admin/article/update/status",data,function(res){
-		$('#checkModal').modal('hide');
-		$('.alert').html("审核通过");
-		$('.alert').show();
-		query();
-	});
-}
-
 function view(id){
 	window.open("/article/"+id+".html");
 }
-
 </script>
