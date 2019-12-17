@@ -14,6 +14,7 @@ public class User implements Serializable{
 	private Integer id;
 	private String username;
 	private String password;
+	private String password1;
 	private String nickname;
 	private Date birthday;
 	private Integer gender;
@@ -95,19 +96,20 @@ public class User implements Serializable{
 	public void setRole(String role) {
 		this.role = role;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", nickname=" + nickname
-				+ ", birthday=" + birthday + ", gender=" + gender + ", locked=" + locked + ", create_time="
-				+ create_time + ", update_time=" + update_time + ", url=" + url + ", score=" + score + ", role=" + role
-				+ "]";
+	public String getPassword1() {
+		return password1;
 	}
-	public User(Integer id, String username, String password, String nickname, Date birthday, Integer gender,
-			Integer locked, Date create_time, Date update_time, String url, Integer score, String role) {
+	public void setPassword1(String password1) {
+		this.password1 = password1;
+	}
+	public User(Integer id, String username, String password, String password1, String nickname, Date birthday,
+			Integer gender, Integer locked, Date create_time, Date update_time, String url, Integer score,
+			String role) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.password1 = password1;
 		this.nickname = nickname;
 		this.birthday = birthday;
 		this.gender = gender;
@@ -121,6 +123,13 @@ public class User implements Serializable{
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", password1=" + password1
+				+ ", nickname=" + nickname + ", birthday=" + birthday + ", gender=" + gender + ", locked=" + locked
+				+ ", create_time=" + create_time + ", update_time=" + update_time + ", url=" + url + ", score=" + score
+				+ ", role=" + role + "]";
 	}
 	//判断是否是管理员
 	public boolean isAdmin() {

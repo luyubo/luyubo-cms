@@ -79,4 +79,11 @@ public interface UserDao {
 	 * @return
 	 */
 	User getByUsername(@Param("username")String username);
+	
+	/**
+	 * 注册功能
+	 * @param user
+	 * @return
+	 */
+	int register(@Param("user")User user);
 }

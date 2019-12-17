@@ -49,6 +49,11 @@
 	      #{user.updateTime})
 	</insert>
 	
+	<insert id="register">
+		insert into cms_user(username, password, nickname)
+		values(#{user.username},#{user.password},#{user.nickname})
+	</insert>
+	
 	<update id="updateLocked">
 		update cms_user
 	    set 

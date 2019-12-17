@@ -20,21 +20,21 @@
 			<h3>帐号注册</h3>
 			<div class="alert alert-danger" role="alert" style="display: none">
 			</div>
-			<form id="loginForm">
+			<form id="registerForm">
 			  <div class="form-group">
 			    <input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名...">
 			  </div>
 			  <div class="form-group">
-			    <input type="text" id="username" name="username" class="form-control" placeholder="请输入昵称...">
+			    <input type="text" id="nickname" name="nickname" class="form-control" placeholder="请输入昵称...">
 			  </div>
 			  <hr>
 			  <div class="form-group">
 			    <input type="password" id="password" name="password" class="form-control"  placeholder="请输入密码...">
 			  </div>
 			  <div class="form-group">
-			    <input type="password" id="password" name="password" class="form-control"  placeholder="请输入确认密码...">
+			    <input type="password" id="password1" name="password1" class="form-control"  placeholder="请输入确认密码...">
 			  </div>
-			  <button type="button" class="btn btn-primary" onclick="login();">注册</button>
+			  <button type="button" class="btn btn-primary" onclick="register();">注册</button>
 			  <label for="exampleInputPassword1">已有帐号，去<a href="/user/login">登录</a></label>
 			</form>
 		</div>
@@ -43,22 +43,25 @@
 <script type="text/javascript" src="/public/js/jquery.min.1.12.4.js"></script>
 <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	function login(){
+	function register(){
 		//空判断
 		var username = $("#username").val();
+		var nickname = $("#nickname").val();
 		var password = $("#password").val();
-		if(username==null || password==""){
+		var password1 = $("#password1").val();
+		if(username==null || password=="" || nickname==null || password1==""){
 			$(".alert").html("请输入用户名和密码");
 			$(".alert").show();
 			return;
 		}
 		$(".alert").hide();
 		//后台验证
-		var formData = $("#loginForm").serialize();
-		$.post("/admin/user/login",formData,function(res){
+		var formData = $("#registerForm").serialize();
+		$.post("/user/register",formData,function(res){
 			if(res.result){
 				//验证通过跳转到后台首页
-				location.href="/admin/home";
+				alert(res.result);
+				location.href="/user/login";
 			}else{
 				//否则提示错误信息
 				$(".alert").html(res.message);

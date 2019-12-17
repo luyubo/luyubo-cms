@@ -25,7 +25,7 @@ import com.luyubo.cms.service.ArticleService;
 import com.luyubo.cms.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user/")
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -67,6 +67,8 @@ public class UserController {
 
 		//判断密码
 		String string2md5 = CmsMd5Util.string2MD5(user.getPassword());
+		System.out.println(string2md5+"=============");
+		System.out.println(userInfo.getPassword()+"---------------");
 		if(string2md5.equals(userInfo.getPassword())) {
 			session.setAttribute(CmsConstant.UserSessionKey, userInfo);
 			return JsonResult.success();
@@ -93,23 +95,38 @@ public class UserController {
 	 * @return: Object      
 	 * @throws
 	 */
-	@RequestMapping(value="register",method=RequestMethod.GET)
-	public Object register() {
-		return "/user/register";
-	}
-	/**
-	 * @Title: register   
-	 * @Description: 用户注册接口   
-	 * @param: @param user
-	 * @param: @param session
-	 * @param: @return      
-	 * @return: Object      
-	 * @throws
-	 */
 	@RequestMapping(value="register",method=RequestMethod.POST)
-	public @ResponseBody Object register(User user,HttpSession session) {
-		return JsonResult.fail(500, "未知错误");
+	@ResponseBody
+	public Object register(User user,HttpSession session) {
+		System.out.println(user+"===================");
+		boolean blank = StringUtil.isBlank(user.getUsername());
+		boolean blank1 = StringUtil.isBlank(user.getNickname());
+		boolean blank2 = StringUtil.isBlank(user.getPassword());
+		boolean blank3 = StringUtil.isBlank(user.getPassword1());
+		if(blank==false || blank1==false || blank2==false || blank3==false) {
+			return JsonResult.fail(500, "用户名或昵称或密码或确定密码不能为空");
+		}
+		
+		if(!user.getPassword().equals(user.getPassword1())) {
+			return JsonResult.fail(500, "两次密码不一样");
+		}
+		boolean flag=userService.register(user);
+		System.out.println(flag+"============");
+		if(flag) {
+			System.out.println("走这里证明成功了");
+			session.setAttribute(CmsConstant.UserSessionKey, user);
+			System.out.println(session.toString());
+			return JsonResult.success();
+		}
+		return JsonResult.fail(500,"位置错误");
 	}
+	
+	
+	  @RequestMapping(value="register",method=RequestMethod.GET)
+	  public  Object register() {
+		  return "/user/register"; 
+	  }
+	 
 	
 	
 	@RequestMapping("center")

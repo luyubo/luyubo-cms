@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bawei.commons.utils.Md5Util;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.luyubo.cms.common.CmsMd5Util;
 import com.luyubo.cms.dao.UserDao;
 import com.luyubo.cms.pojo.User;
 import com.luyubo.cms.service.UserService;
@@ -19,7 +21,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean register(User user) {
 		// TODO Auto-generated method stub
-		return false;
+		String string2md5 = CmsMd5Util.string2MD5(user.getPassword());
+		user.setPassword(string2md5);
+		return userDao.register(user)>0;
 	}
 
 	@Override
