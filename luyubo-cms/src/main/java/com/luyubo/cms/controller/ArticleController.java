@@ -8,16 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.annotation.DirtiesContext.MethodMode;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bawei.commons.utils.Md5Util;
 import com.luyubo.cms.common.CmsConstant;
 import com.luyubo.cms.common.JsonResult;
-import com.luyubo.cms.dao.ArticleDao;
 import com.luyubo.cms.pojo.Article;
 import com.luyubo.cms.pojo.Category;
 import com.luyubo.cms.pojo.Channel;

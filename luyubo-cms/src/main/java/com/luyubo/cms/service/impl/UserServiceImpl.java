@@ -82,4 +82,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.getByUsername(username)!=null;
 	}
 
+	@Override
+	public User getById(Integer userId) {
+		// TODO Auto-generated method stub
+		return userDao.selectById(userId);
+	}
+
 }

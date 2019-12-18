@@ -87,4 +87,27 @@ public interface ArticleDao {
 	 * @return
 	 */
 	int updateDeleteByIds(@Param("ids")String ids);
+	
+	/**
+	 * 根据热度排行查询
+	 * @return
+	 */
+	List<Article> selectByHot();
+	
+	/**
+	 * 根据分类id和频道id查询分页
+	 * @param channelId
+	 * @param cateId
+	 * @return
+	 */
+	List<Article> getListByChannelIdAndCateId(@Param("channelId")Integer channelId, @Param("cateId")Integer cateId);
+	
+	/**
+	 * 根据频道id查询文章分类
+	 * @param channelId
+	 * @param articleId
+	 * @param num
+	 * @return
+	 */
+	List<Article> getListByChannelId(@Param("channelId")Integer channelId, @Param("articleId")Integer articleId, @Param("num")int num);
 }

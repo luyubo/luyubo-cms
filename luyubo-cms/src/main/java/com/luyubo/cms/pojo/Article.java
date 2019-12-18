@@ -47,6 +47,7 @@ public class Article implements Serializable{
     
     private String statusIds;
     
+    private String nickname;
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", picture=" + picture + ", channelId=" + channelId
@@ -54,6 +55,16 @@ public class Article implements Serializable{
 				+ ", userId=" + userId + ", hits=" + hits + ", hot=" + hot + ", status=" + status + ", deleted="
 				+ deleted + ", created=" + created + ", updated=" + updated + ", commentcnt=" + commentcnt
 				+ ", content=" + content + ", statusIds=" + statusIds + "]";
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 

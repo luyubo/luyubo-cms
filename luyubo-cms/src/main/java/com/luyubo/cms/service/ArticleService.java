@@ -79,4 +79,29 @@ public interface ArticleService {
 	 */
 	boolean delByIds(String ids);
 
+	/**
+	 * 根据热度查询文章
+	 * @param pageNum
+	 * @return
+	 */
+	PageInfo<Article> getHotList(Integer pageNum);
+
+	/**
+	 * 根据频道id和分类id查询和分页文章
+	 * @param channelId
+	 * @param cateId
+	 * @param pageNo
+	 * @return
+	 */
+	PageInfo<Article> getListByChannelIdAndCateId(Integer channelId, Integer cateId, Integer pageNo);
+
+	/**
+	 * 根据频道id查询分类列表
+	 * @param channelId
+	 * @param id
+	 * @param i
+	 * @return
+	 */
+	List<Article> getListByChannelId(Integer channelId, Integer id, int i);
+
 }

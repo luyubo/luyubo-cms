@@ -34,6 +34,30 @@
 		 from cms_article article where id in(${ids})
 	</select>
 	
+	<select id="selectByHot" resultType="Article">
+		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId,user.nickname
+		from cms_article article,cms_user user
+		WHERE article.user_id=user.id and article.deleted=0 AND article.`status`=1 AND article.hot>0
+		order by article.hot desc
+	</select>
+	
+	<select id="getListByChannelIdAndCateId" resultType="Article">
+		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId,user.nickname
+		from cms_article article,cms_user user
+		WHERE article.user_id=user.id and article.deleted=0 AND article.`status`=1 
+		AND article.channel_id=#{channelId}
+		<if test="cateId>0">
+			and category_id=#{cateId}
+		</if>
+		order by article.created desc
+	</select>
+	
+	<select id="getListByChannelId" resultType="Article">
+		select *
+		 from cms_article article where deleted=0 and status=1 and channel_id=#{channelId} and id!=#{articleId}
+		 limit ${num}
+	</select>
+	
 	<select id="count" resultType="int">
 		select count(1) from cms_article
 	</select>

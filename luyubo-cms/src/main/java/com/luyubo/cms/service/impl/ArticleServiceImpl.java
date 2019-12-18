@@ -108,4 +108,27 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDao.updateDeleteByIds(ids)>0;
 	}
 
+	@Override
+	public PageInfo<Article> getHotList(Integer pageNum) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(pageNum, 1);
+		List<Article> articleList=articleDao.selectByHot();
+		return new PageInfo<>(articleList);
+	}
+
+	
+	@Override
+	public PageInfo<Article> getListByChannelIdAndCateId(Integer channelId, Integer cateId, Integer pageNum) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(pageNum, 1);
+		List<Article> articleList=articleDao.getListByChannelIdAndCateId(channelId,cateId);
+		return new PageInfo<Article>(articleList);
+	}
+
+	@Override
+	public List<Article> getListByChannelId(Integer channelId, Integer articleId, int num) {
+		// TODO Auto-generated method stub
+		return articleDao.getListByChannelId(channelId,articleId,num);
+	}
+
 }

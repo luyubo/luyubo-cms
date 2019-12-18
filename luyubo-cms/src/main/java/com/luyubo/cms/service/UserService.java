@@ -68,6 +68,8 @@ public interface UserService {
 	 * @return
 	 */
 	public boolean isExist(String username);
+
+	public User getById(Integer userId);
 	
 	
 }
