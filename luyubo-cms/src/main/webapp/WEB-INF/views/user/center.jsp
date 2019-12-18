@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cms后台登录</title>
+<title>个人中心</title>
 <link href="/public/css/bootstrap.min.css" rel="stylesheet">
 <link href="/public/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="/public/css/cms.css" rel="stylesheet">

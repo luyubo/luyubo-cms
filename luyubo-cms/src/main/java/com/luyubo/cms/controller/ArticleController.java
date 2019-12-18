@@ -44,7 +44,8 @@ public class ArticleController {
 	public String add(Integer id,Model model) {
 		logger.info("articleId:{}",id);
 		if(id!=null) {
-			Article article = articleService.selectById(1);
+			Article article = articleService.selectById(id);
+			System.out.println(article);
 			logger.info(article.toString());
 			model.addAttribute("article", article);
 			List<Category> cateList=articleService.getCateListByChannelId(article.getChannelId());

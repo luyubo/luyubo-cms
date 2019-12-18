@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   	<form class="form-inline" id="queryForm">
 	  <div class="form-group mx-sm-3 mb-2">
@@ -49,14 +50,14 @@
        <tr>
 	      <th><input type="checkbox" value="${item.id }" name="chk_list"></th>
 	      <th scope="row">${item.id }</th>
-	      <td>${item.title }</td>
+	      <td title="${item.title }">${fn:substring(item.title,0,10) }</td>
 	      <td>${item.channelName }</td>
 	      <td>${item.categoryName }</td>
 	      <td>${item.hot>0?"是":"否"}</td>
-	      <td>${item.status==1?"已审核":item.status==0?"未审核":"审核未通过"}</td>
+	      <td>${item.status==1?"已审核":item.status==0?"未审核":item.status==2?"草稿":"审核未通过"}</td>
 	      <td><fmt:formatDate value="${item.created }" pattern="yyyy-MM-dd HH:mm"/></td>
 	      <td>
-	      	<c:if test="${item.status==2 }">
+	      	<c:if test="${item.status==2 || item.status==-1}">
 	      		<button type="button" class="btn btn-primary" onclick="edit('${item.id}')">编辑</button>
 	      	</c:if>
 	      		<button type="button" class="btn btn-primary" onclick="view('${item.id}')">查看</button>

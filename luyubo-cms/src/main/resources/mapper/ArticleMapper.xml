@@ -21,7 +21,7 @@
 		<if test="article.statusIds!=null">
 			and article.status in (${article.statusIds})
 		</if>
-		order by updated desc
+		order by hot desc
 	</select>
 	
 	<select id="selectById" resultType="Article">

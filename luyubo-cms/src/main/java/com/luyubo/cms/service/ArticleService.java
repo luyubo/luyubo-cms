@@ -65,5 +65,4 @@ public interface ArticleService {
 	 */
 	boolean save(Article article);
 
-
 }

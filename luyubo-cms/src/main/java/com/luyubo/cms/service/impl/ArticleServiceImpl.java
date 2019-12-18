@@ -77,7 +77,12 @@ public class ArticleServiceImpl implements ArticleService {
 			article.setCommentcnt(0);
 			article.setHits(0);
 			article.setHot(0);
-			articleDao.insert(article);
+			if(article.getStatus()==0) {
+				articleDao.insert(article);
+			}else {
+				article.setStatus(2);
+				articleDao.insert(article);
+			}
 		}else {
 			article.setUpdated(new Date());
 			articleDao.update(article);

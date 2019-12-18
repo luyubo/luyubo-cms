@@ -52,7 +52,7 @@ function login(){
 	$.post("/user/login",formData,function(res){
 		if(res.result){
 			//验证通过跳转到后台首页
-			location.href="/user/center";
+			location.href="/";
 		}else{
 			//否则提示错误信息
 			$(".alert").html(res.message);

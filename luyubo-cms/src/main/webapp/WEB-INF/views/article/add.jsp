@@ -1,29 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	<%-- <%
-		request.setCharacterEncoding("UTF-8");
-		String htmlData = request.getParameter("content1") != null ? request.getParameter("content1") : "";
-	%>
-	<%!
-		private String htmlspecialchars(String str) {
-			str = str.replaceAll("&", "&amp;");
-			str = str.replaceAll("<", "&lt;");
-			str = str.replaceAll(">", "&gt;");
-			str = str.replaceAll("\"", "&quot;");
-			return str;
-		}
-	%> --%>
 <script type="text/javascript"> 
-	/* function htmlspecialchars(str){
-		str = str.replaceAll("&", "&amp;");
-		str = str.replaceAll("<", "&lt;");
-		str = str.replaceAll(">", "&gt;");
-		str = str.replaceAll("\"", "&quot;");
-		str = str.replaceAll("\n\r", "");
-		return str;
-	} */
-	
 	var editor = null;
 	$(document).ready( function(){
 		KindEditor.ready(function(K) {
@@ -50,9 +28,11 @@
 	});
 </script>
 <form id="articleForm" name="articleForm">
+	<input type="hidden"id="status" value="2" name="status">
 	<div class="form-group row">
 		<label for="inputEmail3" class="col-sm-2 col-form-label">文章标题</label>
 		<div class="col-sm-6">
+			<input type="hidden" name="id" value="${article.id }">
 			<input type="text" name="title" value="${article.title }" class="form-control" placeholder="请输入标题">
 		</div>
 	</div>
