@@ -5,7 +5,7 @@
 	 <select id="select" resultType="Article">
 		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId,channel.name channelName,cate.name categoryName
 		from cms_article article,cms_channel channel,cms_category cate
-		WHERE article.channel_id=channel.id AND article.category_id=cate.id
+		WHERE article.channel_id=channel.id AND article.category_id=cate.id and article.deleted=0
 		<if test="article.channelId!=null">
 			and article.channel_id = #{article.channelId}
 		</if>
@@ -21,12 +21,17 @@
 		<if test="article.statusIds!=null">
 			and article.status in (${article.statusIds})
 		</if>
-		order by hot desc
+		order by updated desc
 	</select>
 	
 	<select id="selectById" resultType="Article">
 		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId
 		 from cms_article article where id=#{id}
+	</select>
+	
+	<select id="selectByIds" resultType="Article">
+		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId
+		 from cms_article article where id in(${ids})
 	</select>
 	
 	<select id="count" resultType="int">
@@ -58,6 +63,13 @@
 	      commentCnt = #{article.commentcnt},
 	      content = #{article.content}
 	    where id = #{article.id}
+	</update>
+	
+	<update id="updateDeleteByIds">
+		update cms_article 
+		set 
+		deleted=1
+		where id in (${ids})
 	</update>
 	
 	<delete id="deleteById">

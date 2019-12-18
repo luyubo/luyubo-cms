@@ -91,4 +91,27 @@ public class ArticleController {
 	public String update() {
 		return "update";
 	}
+	
+	/**
+	 * 批量删除
+	 * @return
+	 */
+	@RequestMapping("delByIds")
+	@ResponseBody
+	public JsonResult delByIds(String ids) {
+		if(ids==null) {
+			return JsonResult.fail(10001, "请选择删除的文章");
+		}
+		//已审核判断
+		boolean isCheck=articleService.isAllCheck(ids);
+		if(!isCheck) {
+			return JsonResult.fail(10001, "请选择未审核的文章删除");
+		}
+		//删除
+		boolean result=articleService.delByIds(ids);
+		if(result) {
+			return JsonResult.success();
+		}
+		return JsonResult.fail(500, "位置错误");
+	}
 }

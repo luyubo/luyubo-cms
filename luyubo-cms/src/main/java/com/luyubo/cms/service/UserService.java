@@ -61,6 +61,13 @@ public interface UserService {
 	 * @param user
 	 */
 	boolean update(User user);
+
+	/**
+	 * 根据用户名判断是否已存在
+	 * @param username
+	 * @return
+	 */
+	public boolean isExist(String username);
 	
 	
 }

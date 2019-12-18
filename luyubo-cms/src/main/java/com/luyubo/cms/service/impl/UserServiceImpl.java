@@ -1,5 +1,6 @@
 package com.luyubo.cms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,12 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		String string2md5 = CmsMd5Util.string2MD5(user.getPassword());
 		user.setPassword(string2md5);
-		return userDao.register(user)>0;
+		user.setCreate_time(new Date());
+		user.setUpdate_time(new Date());
+		user.setLocked(0);
+		user.setScore(0);
+		user.setRole("0");
+		return userDao.insert(user)>0;
 	}
 
 	@Override
@@ -68,6 +74,12 @@ public class UserServiceImpl implements UserService {
 	public boolean update(User user) {
 		// TODO Auto-generated method stub
 		return userDao.updateUser(user)>0;
+	}
+
+	@Override
+	public boolean isExist(String username) {
+		// TODO Auto-generated method stub
+		return userDao.getByUsername(username)!=null;
 	}
 
 }

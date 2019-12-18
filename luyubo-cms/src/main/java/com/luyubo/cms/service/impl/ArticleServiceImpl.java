@@ -90,4 +90,22 @@ public class ArticleServiceImpl implements ArticleService {
 		return true;
 	}
 
+	@Override
+	public boolean isAllCheck(String ids) {
+		// TODO Auto-generated method stub
+		List<Article> articleList=articleDao.selectByIds(ids);
+		for (Article article : articleList) {
+			if(article.getStatus()==1) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean delByIds(String ids) {
+		// TODO Auto-generated method stub
+		return articleDao.updateDeleteByIds(ids)>0;
+	}
+
 }

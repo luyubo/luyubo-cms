@@ -107,6 +107,11 @@ public class UserController {
 			return JsonResult.fail(500, "用户名或昵称或密码或确定密码不能为空");
 		}
 		
+		boolean result=userService.isExist(user.getUsername());
+		if(result) {
+			return JsonResult.fail(10001, "用户名已存在");
+		}
+		
 		if(!user.getPassword().equals(user.getPassword1())) {
 			return JsonResult.fail(500, "两次密码不一样");
 		}

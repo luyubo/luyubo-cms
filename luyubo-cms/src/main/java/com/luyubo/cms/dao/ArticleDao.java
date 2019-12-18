@@ -74,4 +74,17 @@ public interface ArticleDao {
 	 * @return
 	 */
 	int addHot(@Param("id")Integer id);
+	/**
+	 * 根据id查询是否过审
+	 * @param ids
+	 * @return
+	 */
+	List<Article> selectByIds(@Param("ids")String ids);
+	
+	/**
+	 * 批量删除、逻辑删除
+	 * @param ids
+	 * @return
+	 */
+	int updateDeleteByIds(@Param("ids")String ids);
 }

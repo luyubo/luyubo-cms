@@ -65,4 +65,18 @@ public interface ArticleService {
 	 */
 	boolean save(Article article);
 
+	/**
+	 * 根据id判断文章是否审核
+	 * @param ids
+	 * @return
+	 */
+	boolean isAllCheck(String ids);
+
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
+	boolean delByIds(String ids);
+
 }
