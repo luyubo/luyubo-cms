@@ -17,7 +17,7 @@
 		<c:if test="${USER_SESSION_ID!=null }">
 			<a class="nav-link" href="/user/center">发文</a> 
 			<a class="nav-link" href="/user/center">个人中心</a> 
-			<a class="nav-link" href="/admin/home">用户管理</a> 
+			<a class="nav-link" href="/admin/home">后台管理</a> 
 			<a class="nav-link" href="javascript:;">${USER_SESSION_ID.nickname }</a>
 			<a class="nav-link" href="/user/logout">退出</a>
 		</c:if>
@@ -87,10 +87,11 @@
 							</div>
 						 </c:forEach>
 					</div>
-				</div>
-				<div style="text-align: center;">
+					<div style="text-align: center;">
 					<jsp:include page="common/page.jsp"></jsp:include>
 				</div>
+				</div>
+				
 					<div class="col-3">
 				<div class="right">
 					<div>最新文章</div>

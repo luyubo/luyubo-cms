@@ -24,6 +24,13 @@ public class User implements Serializable{
 	private String url;
 	private Integer score;
 	private String role;
+	private String birthdayStr;
+	public String getBirthdayStr() {
+		return birthdayStr;
+	}
+	public void setBirthdayStr(String birthdayStr) {
+		this.birthdayStr = birthdayStr;
+	}
 	public Integer getId() {
 		return id;
 	}

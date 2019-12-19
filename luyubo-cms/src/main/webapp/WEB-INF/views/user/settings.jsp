@@ -12,7 +12,7 @@
 	<div class="form-group row">
 		<label for="inputEmail3" class="col-sm-2 col-form-label">我的生日</label>
 		<div class="col-sm-3">
-			<input type="text" name="birthday" value="${user.birthday }" onclick="WdatePicker()">
+			<input type="text" name="birthday" value="${user.birthdayStr }" onclick="WdatePicker()">
 		</div>
 	</div>
 	<div class="form-group row">

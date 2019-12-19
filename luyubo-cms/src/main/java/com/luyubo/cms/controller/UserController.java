@@ -1,5 +1,6 @@
 package com.luyubo.cms.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -146,6 +147,7 @@ public class UserController {
 	public String settings(HttpServletResponse response,HttpSession session,Model m) {
 		User userInfoUser=(User) session.getAttribute(CmsConstant.UserSessionKey);
 		User user=userService.getByUsername(userInfoUser.getUsername());
+		user.setBirthdayStr(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getBirthday()));
 		m.addAttribute("user", user);
 		return "user/settings";
 	}
