@@ -25,6 +25,13 @@ public class User implements Serializable{
 	private Integer score;
 	private String role;
 	private String birthdayStr;
+	private String headimg;
+	public String getHeadimg() {
+		return headimg;
+	}
+	public void setHeadimg(String headimg) {
+		this.headimg = headimg;
+	}
 	public String getBirthdayStr() {
 		return birthdayStr;
 	}

@@ -10,9 +10,18 @@
 		</div>
 	</div>
 	<div class="form-group row">
+		<label for="inputEmail3" class="col-sm-2 col-form-label">我的头像</label>
+		<div class="col-sm-10">
+			<jsp:include page="../common/uploadImg.jsp">
+				<jsp:param value="headimg" name="feildName"/>
+				<jsp:param value="${user.headimg }" name="feildValue"/>
+			</jsp:include>
+		</div>
+	</div>
+	<div class="form-group row">
 		<label for="inputEmail3" class="col-sm-2 col-form-label">我的生日</label>
 		<div class="col-sm-3">
-			<input type="text" name="birthday" value="${user.birthdayStr }" onclick="WdatePicker()">
+			<input type="text" name="birthdayStr" value="${user.birthdayStr }" onclick="WdatePicker()">
 		</div>
 	</div>
 	<div class="form-group row">
@@ -31,7 +40,7 @@
 	<div class="form-group row">
 		<label for="inputEmail3" class="col-sm-2 col-form-label">博客网址</label>
 		<div class="col-sm-10">
-			<input type="text" name="url" value="${user.url}" class="form-control" placeholder="https://www.csdn.net/nav/java">
+			<input type="text" name="url" value="${user.url }" class="form-control" placeholder="https://www.csdn.net/nav/java">
 		</div>
 	</div>
 	<div class="form-group row">

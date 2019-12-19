@@ -110,4 +110,11 @@ public interface ArticleDao {
 	 * @return
 	 */
 	List<Article> getListByChannelId(@Param("channelId")Integer channelId, @Param("articleId")Integer articleId, @Param("num")int num);
+	
+	/**
+	 * 根据最新查询
+	 * @param num
+	 * @return
+	 */
+	List<Article> getNewList(@Param("num")int num);
 }

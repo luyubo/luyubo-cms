@@ -104,4 +104,11 @@ public interface ArticleService {
 	 */
 	List<Article> getListByChannelId(Integer channelId, Integer id, int i);
 
+	/**
+	 * 根据最新查询
+	 * @param i
+	 * @return
+	 */
+	List<Article> getNewList(int num);
+
 }

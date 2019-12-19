@@ -63,27 +63,14 @@
 	
 	<update id="update">
 		update cms_user
-	    set username = #{user.username},
-	      password = #{user.password},
+	    set 
 	      nickname = #{user.nickname},
 	      birthday = #{user.birthday},
 	      gender = #{user.gender},
-	      locked = #{user.locked},
-	      score = #{user.score},
-	      role = #{user.role},
 	      url = #{user.url},
-	      create_time = #{user.create_time},
-	      update_time = #{user.update_time}
+	      update_time = #{user.update_time},
+	      headimg=#{user.headimg}
 	    where id = #{user.id}
-	</update>
-	
-	<update id="updateUser">
-		update cms_user
-	    set nickname = #{user.nickname},
-	      birthday = #{user.birthday},
-	      gender = #{user.gender},
-	       url = #{user.url}
-	       where id=#{user.id}
 	</update>
 	
 	<delete id="deleteById">

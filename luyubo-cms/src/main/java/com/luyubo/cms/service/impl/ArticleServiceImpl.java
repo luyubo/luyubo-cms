@@ -131,4 +131,10 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDao.getListByChannelId(channelId,articleId,num);
 	}
 
+	@Override
+	public List<Article> getNewList(int num) {
+		// TODO Auto-generated method stub
+		return articleDao.getNewList(num);
+	}
+
 }

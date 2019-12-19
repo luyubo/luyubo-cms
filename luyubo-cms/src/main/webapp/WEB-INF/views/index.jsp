@@ -7,13 +7,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/public/css/bootstrap.min.css" rel="stylesheet">
 <link href="/public/css/index.css" rel="stylesheet">
+<script type="text/javascript">
+	var channelId = '${channelId}';
+	var cateId = '${cateId}';
+</script>
 <title>前台首页</title>
 </head>
 <body>
 	<nav class="nav justify-content-start" style="background-color: #222;">
-		<a class="nav-link navbar-brand" href="#">
-			<img src="https://v4.bootcss.com/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
-		</a>
+		<c:if test="${USER_SESSION_ID!=null && USER_SESSION_ID.headimg!=null }">
+			<a class="nav-link navbar-brand" href="#">
+				<img src="${USER_SESSION_ID.headimg }" width="30" height="30" alt="">
+			</a>
+		</c:if>
+		<c:if test="${USER_SESSION_ID==null || USER_SESSION_ID.headimg==null  }">
+			<a class="nav-link navbar-brand" href="#">
+				<img src="https://v4.bootcss.com/docs/4.3/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+			</a>
+		</c:if>
 		<c:if test="${USER_SESSION_ID!=null }">
 			<a class="nav-link" href="/user/center">发文</a> 
 			<a class="nav-link" href="/user/center">个人中心</a> 
@@ -25,6 +36,7 @@
 			<a class="nav-link" href="/user/login">登录</a>
 		</c:if>
 	</nav>
+	
 	<div class="container-fluid">
 		<div class="row offset-1" style="margin-top: 15px;">
 			<div class="col-1">
@@ -40,6 +52,7 @@
 				  </c:forEach>
 				</ul>
 			</div>
+			
 			<div class="col-6">
 				
 				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -50,6 +63,7 @@
 						  </div>
 					  </c:forEach>
 				  </div>
+				  
 				  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
 				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				    <span class="sr-only">Previous</span>
@@ -59,8 +73,7 @@
 				    <span class="sr-only">Next</span>
 				  </a>
 				</div>
-								
-				
+					
 				<c:if test="${cateList.size()>0 }">
 					<ul class="nav nav-tabs">
 						<li class="nav-item ">
@@ -76,7 +89,7 @@
 				
 					<div style="margin-top: 18px;">
 						<c:forEach items="${pageInfo.list }" var="item">
-						  <div class="media">
+						  	<div class="media">
 							  <img src="${item.picture }" class="mr-3" alt="...">
 							  <div class="media-body">
 							    <h4 class="mt-1">
@@ -85,87 +98,36 @@
 							    <p style="color: #999;">${item.nickname }  <fmt:formatDate value="${item.created }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
 							  </div>
 							</div>
-						 </c:forEach>
+					  	</c:forEach>
+				  	</div>
+				  	
+				  	<div style="text-align: center;">
+						<jsp:include page="common/page.jsp"></jsp:include>
 					</div>
-					<div style="text-align: center;">
-					<jsp:include page="common/page.jsp"></jsp:include>
-				</div>
 				</div>
 				
-					<div class="col-3">
-				<div class="right">
-					<div>最新文章</div>
-					<ul class="list-unstyled">
-					  <li class="media">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">网友举报猫咖私养小熊猫，初步查明</h5>
-					    </div>
-					  </li>
-					  <li class="media my-4">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">陈思诚监制《误杀》周五内地票房轻松夺冠</h5>
-					    </div>
-					  </li>
-					  <li class="media">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">陈思诚监制《误杀》周五内地票房轻松夺冠</h5>
-					    </div>
-					  </li>
-					  <li class="media my-4">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">陈思诚监制《误杀》周五内地票房轻松夺冠</h5>
-					    </div>
-					  </li>
-					  <li class="media">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">陈思诚监制《误杀》周五内地票房轻松夺冠</h5>
-					    </div>
-					  </li>
-					</ul>
+				<div class="col-3">
+					<div class="right" >
+						<div>最新文章</div>
+						<ul class="list-unstyled">
+						  <c:forEach items="${newArticleList }" var="item">
+							  <li class="media">
+							    <a href="/article/${item.id }.html">
+							    	<img style="width: 64px;height: 64px;" src="${item.picture }" class="mr-3" alt="...">
+							    </a>
+							    <div class="media-body">
+							      <h5 class="mt-0 mb-1"><a href="/article/${item.id }.html">${item.title }</a></h5>
+							    </div>
+							  </li>
+						  </c:forEach>
+						</ul>
+					</div>
+					
 				</div>
-				<div class="right" >
-					<div style="">热点文章</div>
-					<ul class="list-unstyled">
-					  <li class="media">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">网友举报猫咖私养小熊猫，初步查明</h5>
-					    </div>
-					  </li>
-					  <li class="media my-4">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">陈思诚监制《误杀》周五内地票房轻松夺冠</h5>
-					    </div>
-					  </li>
-					  <li class="media">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">陈思诚监制《误杀》周五内地票房轻松夺冠</h5>
-					    </div>
-					  </li>
-					  <li class="media my-4">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">陈思诚监制《误杀》周五内地票房轻松夺冠</h5>
-					    </div>
-					  </li>
-					  <li class="media">
-					    <img style="width: 64px;height: 64px;" src="https://p3.pstatp.com/list/240x240/pgc-image/be878f512a494344bf29766431bb0c84" class="mr-3" alt="...">
-					    <div class="media-body">
-					      <h5 class="mt-0 mb-1">陈思诚监制《误杀》周五内地票房轻松夺冠</h5>
-					    </div>
-					  </li>
-					</ul>
-				</div>
+				
 			</div>
+			
 		</div>
-	</div>
 	<p class="nav justify-content-center" style="background-color: #222;">
 		<a class="nav-link" href="javascript:;">友情链接</a>
 	</p>
@@ -178,9 +140,13 @@
 	<script type="text/javascript" src="/public/js/jquery.min.1.12.4.js"></script>
 	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		function gotoPage(pageNum){
+	function gotoPage(pageNum){
+		if(channelId==''){
 			window.location.href="/hot/"+pageNum+".html"
+		}else{
+			window.location.href="/"+channelId+"/"+cateId+"/"+pageNum+".html"
 		}
+	}
 	</script>
 </body>
 </html>

@@ -40,6 +40,9 @@ public class IndexController {
 		//分类
 		List<Slide> slideList=slideService.getAll();
 		model.addAttribute("slideList", slideList);
+		//最新文章
+		List<Article> newArticleList=articleService.getNewList(6);
+		model.addAttribute("newArticleList", newArticleList);
 		//热点文章
 		if (pageNum==null) {
 			pageNum=1;
@@ -55,6 +58,9 @@ public class IndexController {
 		//频道
 		List<Channel> channelList = articleService.getChannelList();
 		model.addAttribute("channelList", channelList);
+		//最新文章
+		List<Article> newArticleList=articleService.getNewList(6);
+		model.addAttribute("newArticleList", newArticleList);
 		//分类
 		List<Category> cateList = articleService.getCateListByChannelId(channelId);
 		model.addAttribute("cateList", cateList);
@@ -71,6 +77,7 @@ public class IndexController {
 		model.addAttribute("article", article);
 		//查询用户
 		User user=userService.getById(article.getUserId());
+		System.out.println(user+"================");
 		model.addAttribute("user", user);
 		//查询相关文章
 		List<Article> articleList=articleService.getListByChannelId(article.getChannelId(),id,10);

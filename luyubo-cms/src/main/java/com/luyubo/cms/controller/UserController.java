@@ -160,9 +160,15 @@ public class UserController {
 	 */
 	@RequestMapping(value = "settings",method = RequestMethod.POST)
 	@ResponseBody
-	public Object settings(User user) {
-		userService.update(user);
-		return JsonResult.success();
+	public Object settings(User user,HttpSession session) {
+		user.setBirthday(java.sql.Date.valueOf(user.getBirthdayStr()));
+		boolean result = userService.update(user);
+		if(result) {
+			User userInfo = userService.getById(user.getId());
+			session.setAttribute(CmsConstant.UserSessionKey, userInfo);
+			return JsonResult.success();
+		}
+		return JsonResult.fail(10002, "修改失败");
 	}
 	
 	@RequestMapping("comment")
