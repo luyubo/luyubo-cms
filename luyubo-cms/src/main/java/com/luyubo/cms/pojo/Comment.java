@@ -17,6 +17,34 @@ public class Comment implements Serializable{
 	private Integer userId;
 	private String content;
 	private String created;
+	private String nickname;
+    private String headimg;
+    private Integer deleted;
+    private String title;
+	public Integer getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(Integer deleted) {
+		this.deleted = deleted;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getHeadimg() {
+		return headimg;
+	}
+	public void setHeadimg(String headimg) {
+		this.headimg = headimg;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -47,13 +75,18 @@ public class Comment implements Serializable{
 	public void setCreated(String created) {
 		this.created = created;
 	}
-	public Comment(Integer id, Integer articleId, Integer userId, String content, String created) {
+	public Comment(Integer id, Integer articleId, Integer userId, String content, String created, String nickname,
+			String headimg, Integer deleted, String title) {
 		super();
 		this.id = id;
 		this.articleId = articleId;
 		this.userId = userId;
 		this.content = content;
 		this.created = created;
+		this.nickname = nickname;
+		this.headimg = headimg;
+		this.deleted = deleted;
+		this.title = title;
 	}
 	public Comment() {
 		super();
@@ -62,6 +95,7 @@ public class Comment implements Serializable{
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", articleId=" + articleId + ", userId=" + userId + ", content=" + content
-				+ ", created=" + created + "]";
+				+ ", created=" + created + ", nickname=" + nickname + ", headimg=" + headimg + ", deleted=" + deleted
+				+ ", title=" + title + "]";
 	}
 }

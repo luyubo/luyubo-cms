@@ -109,6 +109,6 @@ public class ArticleController {
 		if(result) {
 			return JsonResult.success();
 		}
-		return JsonResult.fail(500, "位置错误");
+		return JsonResult.fail(500, "未知错误");
 	}
 }

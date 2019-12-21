@@ -59,4 +59,20 @@ public interface CommentDao {
 	 * @return
 	 */
 	int deleteByIds(@Param("ids") String ids);
+	
+	
+	List<Comment> getByUserId(@Param("comment")Comment comment);
+	
+	/**
+	 * 查询所有
+	 * @return
+	 */
+	List<Comment> selectAll();
+	
+	/**
+	 * 根据id逻辑删除评论
+	 * @param ids
+	 * @return
+	 */
+	int delUpdateByIds(@Param("ids")String ids);
 }

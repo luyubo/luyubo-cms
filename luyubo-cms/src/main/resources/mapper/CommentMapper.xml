@@ -2,7 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luyubo.cms.dao.CommentDao">
 	<select id="select" resultType="Comment">
+		select c.*,u.nickname,u.headimg 
+		from cms_comment c,cms_user u where c.userId=u.id and c.deleted=0
+		<if test="comment.articleid!=null">
+			and c.articleId=#{comment.articleId}
+		</if>
+		order by created desc
+	</select>
+	
+	<select id="selectAll" resultType="Comment">
 		select * from cms_comment
+	</select>
+	
+	<select id="getByUserId" resultType="Comment">
+		select cms_comment.*,cms_article.title,cms_user.nickname
+		from cms_comment left join cms_user on cms_user.id=cms_comment.userId
+		left join cms_article on
+		cms_comment.articleId=cms_article.id
+		WHERE cms_comment.userId=#{comment.userId} and cms_comment.deleted=0
+		<if test="comment.title!=null and comment.title!=''">
+			and cms_article.title like '%${comment.title}%'
+		</if>
+		<if test="comment.created!=null and comment.created!=''">
+			and cms_comment.created&gt;=#{comment.created}
+		</if>
+		order by cms_comment.created desc
 	</select>
 	
 	<select id="selectById" resultType="Comment">
@@ -15,9 +39,9 @@
 	
 	<insert id="insert">
 		insert into cms_comment (articleId, userId, content, 
-      created)
-    values (#{comment.articleid}, #{comment.userid}, #{comment.content}, 
-      #{comment.created})
+      created,deleted)
+    values (#{comment.articleId}, #{comment.userId}, #{comment.content}, 
+      #{comment.created},#{comment.deleted})
 	</insert>
 	
 	<update id="update">
@@ -27,6 +51,12 @@
 	      content = #{comment.content},
 	      created = #{comment.created}
 	    where id = #{comment.id}
+	</update>
+	
+	<update id="delUpdateByIds">
+		update cms_comment
+		set deleted=1
+		where id in (${ids})
 	</update>
 	
 	<delete id="deleteById">

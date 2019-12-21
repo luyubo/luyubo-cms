@@ -143,7 +143,7 @@ public class User implements Serializable{
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", password1=" + password1
 				+ ", nickname=" + nickname + ", birthday=" + birthday + ", gender=" + gender + ", locked=" + locked
 				+ ", create_time=" + create_time + ", update_time=" + update_time + ", url=" + url + ", score=" + score
-				+ ", role=" + role + "]";
+				+ ", role=" + role + ", birthdayStr=" + birthdayStr + ", headimg=" + headimg + "]";
 	}
 	//判断是否是管理员
 	public boolean isAdmin() {

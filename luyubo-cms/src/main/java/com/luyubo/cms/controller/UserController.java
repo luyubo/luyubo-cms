@@ -1,6 +1,7 @@
 package com.luyubo.cms.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +22,10 @@ import com.luyubo.cms.common.CmsMd5Util;
 import com.luyubo.cms.common.JsonResult;
 import com.luyubo.cms.pojo.Article;
 import com.luyubo.cms.pojo.Channel;
+import com.luyubo.cms.pojo.Comment;
 import com.luyubo.cms.pojo.User;
 import com.luyubo.cms.service.ArticleService;
+import com.luyubo.cms.service.CommentService;
 import com.luyubo.cms.service.UserService;
 
 @Controller
@@ -33,6 +36,9 @@ public class UserController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	/**
 	 * 用户登录界面
@@ -147,7 +153,11 @@ public class UserController {
 	public String settings(HttpServletResponse response,HttpSession session,Model m) {
 		User userInfoUser=(User) session.getAttribute(CmsConstant.UserSessionKey);
 		User user=userService.getByUsername(userInfoUser.getUsername());
-		user.setBirthdayStr(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getBirthday()));
+		if(user.getBirthday()!=null) {
+			user.setBirthdayStr(new SimpleDateFormat("yyyy-MM-dd").format(user.getBirthday()));
+		}else {
+			user.setBirthdayStr(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		}
 		m.addAttribute("user", user);
 		return "user/settings";
 	}
@@ -161,6 +171,7 @@ public class UserController {
 	@RequestMapping(value = "settings",method = RequestMethod.POST)
 	@ResponseBody
 	public Object settings(User user,HttpSession session) {
+		System.out.println(user+"===================");
 		user.setBirthday(java.sql.Date.valueOf(user.getBirthdayStr()));
 		boolean result = userService.update(user);
 		if(result) {
@@ -172,7 +183,21 @@ public class UserController {
 	}
 	
 	@RequestMapping("comment")
-	public String comment(HttpServletResponse response,HttpSession session) {
+	public String comment(Comment comment,Model model,HttpSession session,
+			@RequestParam(value="pageNum",defaultValue="1")int pageNum,@RequestParam(value="pageSize",defaultValue="3") int pageSize) {
+		//通过session获得user信息
+		System.out.println(comment+"================");
+		User userInfo=(User) session.getAttribute(CmsConstant.UserSessionKey);
+		comment.setUserId(userInfo.getId());
+		System.out.println(comment+"-----------------");
+		
+		//根据user的id获得评论表的数据
+		PageInfo<Comment> pageInfo=commentService.getByUserId(comment,pageNum,pageSize);
+		List<Comment> commentList=commentService.select();
+		
+		//返回前台
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("commentList", commentList);
 		return "user/comment";
 	}
 	
