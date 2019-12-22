@@ -7,7 +7,10 @@
 	  </div>
 	  <input type="hidden" name="pageNum" value="1">
 	  <div class="form-group mx-sm-3 mb-2">
-	    <input type="text" name="created" value="${comment.created}" class="form-control" onclick="WdatePicker()" placeholder="请输入创建时间">
+	    <input type="text" name="created" value="${comment.created}" class="form-control" onclick="WdatePicker()" placeholder="请输入最早创建时间">
+	  </div>
+	  <div class="form-group mx-sm-3 mb-2">
+	    <input type="text" name="created1" value="${comment.created1}" class="form-control" onclick="WdatePicker()" placeholder="请输入最晚创建时间">
 	  </div>
 	  <button type="button" class="btn btn-primary mb-2" onclick="query()">查询</button>
 	</form>

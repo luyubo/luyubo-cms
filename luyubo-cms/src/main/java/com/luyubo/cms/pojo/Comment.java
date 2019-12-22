@@ -17,10 +17,17 @@ public class Comment implements Serializable{
 	private Integer userId;
 	private String content;
 	private String created;
+	private String created1;
 	private String nickname;
     private String headimg;
     private Integer deleted;
     private String title;
+	public String getCreated1() {
+		return created1;
+	}
+	public void setCreated1(String created1) {
+		this.created1 = created1;
+	}
 	public Integer getDeleted() {
 		return deleted;
 	}
@@ -95,7 +102,7 @@ public class Comment implements Serializable{
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", articleId=" + articleId + ", userId=" + userId + ", content=" + content
-				+ ", created=" + created + ", nickname=" + nickname + ", headimg=" + headimg + ", deleted=" + deleted
-				+ ", title=" + title + "]";
+				+ ", created=" + created + ", created1=" + created1 + ", nickname=" + nickname + ", headimg=" + headimg
+				+ ", deleted=" + deleted + ", title=" + title + "]";
 	}
 }

@@ -137,4 +137,12 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleDao.getNewList(num);
 	}
 
+	@Override
+	public boolean updateHits(Integer id) {
+		// TODO Auto-generated method stub
+		int i=articleDao.updateHit(id);
+		System.out.println("-------------"+i);
+		return i>0;
+	}
+
 }

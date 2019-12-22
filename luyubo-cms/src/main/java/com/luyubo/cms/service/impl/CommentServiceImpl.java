@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bawei.commons.utils.DateUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.luyubo.cms.dao.ArticleDao;
 import com.luyubo.cms.dao.CommentDao;
 import com.luyubo.cms.pojo.Comment;
 import com.luyubo.cms.service.CommentService;
@@ -21,13 +22,18 @@ import com.luyubo.cms.service.CommentService;
 public class CommentServiceImpl implements CommentService{
 	@Autowired
 	private CommentDao commentDao;
+	@Autowired
+	private ArticleDao ArticleDao;
 	@Override
 	public boolean add(Comment comment) {
 		// TODO Auto-generated method stub
 		String format = DateUtil.dateTimeFormat.format(new Date());
 		comment.setCreated(format);
 		comment.setDeleted(0);
-		return commentDao.insert(comment)>0;
+		boolean flag=commentDao.insert(comment)>0;
+		int i=commentDao.selectCommentCnt(comment.getArticleId());
+		ArticleDao.updateCommentCnt(comment.getArticleId(),i);
+		return flag;
 	}
 
 	@Override
@@ -48,11 +54,6 @@ public class CommentServiceImpl implements CommentService{
 		return new PageInfo<Comment>(commentList);
 	}
 
-	@Override
-	public List<Comment> select() {
-		// TODO Auto-generated method stub
-		return commentDao.selectAll();
-	}
 
 	@Override
 	public boolean delByIds(String ids) {

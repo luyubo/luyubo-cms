@@ -63,11 +63,6 @@ public interface CommentDao {
 	
 	List<Comment> getByUserId(@Param("comment")Comment comment);
 	
-	/**
-	 * 查询所有
-	 * @return
-	 */
-	List<Comment> selectAll();
 	
 	/**
 	 * 根据id逻辑删除评论
@@ -75,4 +70,11 @@ public interface CommentDao {
 	 * @return
 	 */
 	int delUpdateByIds(@Param("ids")String ids);
+	
+	/**
+	 * 根据文章id查询该文章总共有多少个评论
+	 * @param articleId
+	 * @return
+	 */
+	int selectCommentCnt(@Param("articleId")Integer articleId);
 }

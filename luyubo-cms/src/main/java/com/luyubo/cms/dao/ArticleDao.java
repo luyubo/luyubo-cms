@@ -117,4 +117,17 @@ public interface ArticleDao {
 	 * @return
 	 */
 	List<Article> getNewList(@Param("num")int num);
+	
+	/**
+	 * 修改文章表的评论总数
+	 * @param commentcnt
+	 * @return
+	 */
+	int updateCommentCnt(@Param("articleId")Integer articleId,@Param("commentCnt")int commentCnt);
+	
+	/**
+	 * 修改点击数
+	 * @return
+	 */
+	int updateHit(@Param("id")Integer id);
 }

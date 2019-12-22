@@ -1,6 +1,5 @@
 package com.luyubo.cms.service;
 
-import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.luyubo.cms.pojo.Comment;
@@ -30,12 +29,6 @@ public interface CommentService {
 	 * @return
 	 */
 	PageInfo<Comment> getByUserId(Comment comment, int pageNum, int pageSize);
-
-	/**
-	 * 查询所有评论
-	 * @return
-	 */
-	List<Comment> select();
 
 	/**
 	 * 根据id删除评论

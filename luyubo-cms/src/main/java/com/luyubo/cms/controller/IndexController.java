@@ -75,6 +75,9 @@ public class IndexController {
 		//查询文章
 		Article article = articleService.selectById(id);
 		model.addAttribute("article", article);
+		//修改文章点击量
+		boolean flag=articleService.updateHits(id);
+		System.out.println(flag+"================");
 		//查询用户
 		User user=userService.getById(article.getUserId());
 		System.out.println(user+"================");

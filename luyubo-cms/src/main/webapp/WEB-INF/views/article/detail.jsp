@@ -61,6 +61,7 @@
 					</div>
 				</div>
 			</div>
+			  
 
 			<div class="col-3">
 				<c:if test="${articleList.size()>0 }">
@@ -105,6 +106,7 @@
 			}
 		})
 	}
+	
 	</script>
 </body>
 </html>

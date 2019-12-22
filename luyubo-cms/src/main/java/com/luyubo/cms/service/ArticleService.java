@@ -111,4 +111,11 @@ public interface ArticleService {
 	 */
 	List<Article> getNewList(int num);
 
+	/**
+	 * 修改文章点击量
+	 * @param id
+	 * @return
+	 */
+	boolean updateHits(Integer id);
+
 }

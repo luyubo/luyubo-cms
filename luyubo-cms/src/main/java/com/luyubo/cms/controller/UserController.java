@@ -193,11 +193,9 @@ public class UserController {
 		
 		//根据user的id获得评论表的数据
 		PageInfo<Comment> pageInfo=commentService.getByUserId(comment,pageNum,pageSize);
-		List<Comment> commentList=commentService.select();
 		
 		//返回前台
 		model.addAttribute("pageInfo", pageInfo);
-		model.addAttribute("commentList", commentList);
 		return "user/comment";
 	}
 	
