@@ -132,10 +132,9 @@
 		<a class="nav-link" href="javascript:;">友情链接</a>
 	</p>
 	<div class="justify-content-center" style="margin-bottom: 200px;text-align: center;">
-			<a href="#" style="padding-right: 36px;">拉勾网</a>
-			<a href="#" style="padding-right: 36px;">猎聘网</a>
-			<a href="#" style="padding-right: 36px;">中华英才网</a>
-			<a href="#" style="padding-right: 36px;">51Job</a>
+		<c:forEach items="${linkList}" var="link">
+			<a href="${link.url}" style="padding-right: 36px;" target="_blank">${link.text}</a>
+		</c:forEach>
 	</div>
 	<script type="text/javascript" src="/public/js/jquery.min.1.12.4.js"></script>
 	<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>

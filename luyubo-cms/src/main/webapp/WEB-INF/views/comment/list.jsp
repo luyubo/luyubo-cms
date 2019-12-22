@@ -6,7 +6,7 @@
 		<c:forEach items="${pageInfo.list }" var="item">
 			<div class="col-10">
 			  <div style="margin-top: 10px;margin-bottom: 10px;color: #777;">
-					<span><img src="${item.headimg }" style="height:28;border-radius: 65px;" alt="">${item.nickname }</span> 
+					<span><img src="${item.headimg }" style="height:28px;width:28px;border-radius: 35px;" alt="">${item.nickname }</span> 
 					<span>${item.created }</span>
 			  </div>
 			  <div style="margin-top: 10px;margin-bottom: 10px;">

@@ -12,9 +12,11 @@ import com.github.pagehelper.PageInfo;
 import com.luyubo.cms.pojo.Article;
 import com.luyubo.cms.pojo.Category;
 import com.luyubo.cms.pojo.Channel;
+import com.luyubo.cms.pojo.Link;
 import com.luyubo.cms.pojo.Slide;
 import com.luyubo.cms.pojo.User;
 import com.luyubo.cms.service.ArticleService;
+import com.luyubo.cms.service.LinkService;
 import com.luyubo.cms.service.SlideService;
 import com.luyubo.cms.service.UserService;
 
@@ -26,6 +28,8 @@ public class IndexController {
 	private UserService userService;
 	@Autowired
 	private SlideService slideService;
+	@Autowired
+	private LinkService LinkService;
 	
 	@RequestMapping(value = "/")
 	public String index(Model model) {
@@ -49,6 +53,9 @@ public class IndexController {
 		}
 		PageInfo<Article> pageInfo=articleService.getHotList(pageNum);
 		model.addAttribute("pageInfo", pageInfo);
+		//查询所有友情链接
+		List<Link> linkList=LinkService.select();
+		model.addAttribute("linkList", linkList);
 		return "index";
 	}
 	
@@ -67,6 +74,9 @@ public class IndexController {
 		//查询相关文章
 		PageInfo<Article> pageInfo=articleService.getListByChannelIdAndCateId(channelId,cateId,pageNo);
 		model.addAttribute("pageInfo",pageInfo);
+		//查询所有友情链接
+		List<Link> linkList=LinkService.select();
+		model.addAttribute("linkList", linkList);
 		return "index";
 	}
 	

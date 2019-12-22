@@ -38,8 +38,9 @@
 	<div class="container-fluid">
 		<div class="row offset-1" style="margin-top: 15px;">
 			<div class="col-7">
-				<h1><img src="${user.headimg }" style="height:28px;border-radius: 28px;" alt="">${article.title }</h1>
+				<h1>${article.title }</h1>
 				<div style="margin-top: 10px;margin-bottom: 10px;font-weight: bold;color: #777;">
+					<img src="${user.headimg }" style="height:28px;width:28px;border-radius: 28px;" alt="">
 					<span>${user.nickname }</span> 
 					<span><fmt:formatDate value="${article.created}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 					<span style="font-size: 24px;">收藏</span>
