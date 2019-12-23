@@ -63,7 +63,6 @@ public class LinkController {
 	@RequestMapping("save")
 	@ResponseBody
 	public JsonResult save(Link link) {
-		System.out.println(link+"==================");
 		linkService.save(link);
 		return JsonResult.success();
 	}

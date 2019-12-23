@@ -79,7 +79,7 @@
 	    values (#{article.title}, #{article.picture}, #{article.channelId}, 
 	      #{article.categoryId}, #{article.userId}, #{article.hits}, 
 	      #{article.hot}, #{article.status}, #{article.deleted}, 
-	      #{article.created}, #{article.updated}, #{article.commentcnt}, 
+	      #{article.created}, #{article.updated}, #{article.commentCnt}, 
 	      #{article.content})
 	</insert>
 	
@@ -92,7 +92,7 @@
 	      user_id = #{article.userId},
 	      status = #{article.status},
 	      updated = #{article.updated},
-	      commentCnt = #{article.commentcnt},
+	      commentCnt = #{article.commentCnt},
 	      content = #{article.content}
 	    where id = #{article.id}
 	</update>
@@ -106,13 +106,25 @@
 	
 	<update id="updateCommentCnt">
 		update cms_article
-		set commentCnt=#{commentCnt}
+		set commentCnt=commentCnt+1
 		where id=#{articleId}
+	</update>
+	
+	<update id="updateTousuCnt">
+		update cms_article 
+		set tousuCnt=tousuCnt+1
+		where id=#{article.id}
 	</update>
 	
 	<update id="updateHit">
 		update cms_article
 		set hits=hits+1
+		where id=#{id}
+	</update>
+	
+	<update id="updateStatus3">
+		update cms_article
+		set status=3
 		where id=#{id}
 	</update>
 	

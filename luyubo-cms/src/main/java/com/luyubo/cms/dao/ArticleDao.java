@@ -123,11 +123,25 @@ public interface ArticleDao {
 	 * @param commentcnt
 	 * @return
 	 */
-	int updateCommentCnt(@Param("articleId")Integer articleId,@Param("commentCnt")int commentCnt);
+	int updateCommentCnt(@Param("articleId")Integer articleId);
 	
 	/**
 	 * 修改点击数
 	 * @return
 	 */
 	int updateHit(@Param("id")Integer id);
+	
+	/**
+	 * 根据文章id修改文章投诉数
+	 * @param article
+	 * @return
+	 */
+	int updateTousuCnt(@Param("article")Article article);
+	
+	/**
+	 * 修改文章状态为3
+	 * @param id
+	 * @return
+	 */
+	int updateStatus3(@Param("id")Integer id);
 }

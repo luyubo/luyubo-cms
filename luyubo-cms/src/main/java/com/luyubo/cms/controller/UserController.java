@@ -19,6 +19,7 @@ import com.bawei.commons.utils.StringUtil;
 import com.github.pagehelper.PageInfo;
 import com.luyubo.cms.common.CmsConstant;
 import com.luyubo.cms.common.CmsMd5Util;
+import com.luyubo.cms.common.CookieUtil;
 import com.luyubo.cms.common.JsonResult;
 import com.luyubo.cms.pojo.Article;
 import com.luyubo.cms.pojo.Channel;
@@ -57,16 +58,14 @@ public class UserController {
 	 */
 	@RequestMapping(value="login",method=RequestMethod.POST)
 	@ResponseBody
-	public Object login(User user,HttpSession session) {
+	public Object login(User user,HttpSession session,HttpServletResponse response) {
 		boolean blank = StringUtil.isBlank(user.getUsername());
 		boolean blank1 = StringUtil.isBlank(user.getPassword());
 		if(blank==false || blank1==false) {
-			System.out.println("登录用户名和密码为空失败--------");
 			return JsonResult.fail(1000, "用户名和密码不能为空");
 		}
 		//查询用户
 		User userInfo = userService.getByUsername(user.getUsername());
-		System.out.println(userInfo);
 		//判断是否管理员
 		if(userInfo==null) {
 			return JsonResult.fail(1000, "用户名或密码错误");
@@ -74,13 +73,19 @@ public class UserController {
 
 		//判断密码
 		String string2md5 = CmsMd5Util.string2MD5(user.getPassword());
-		System.out.println(string2md5+"=============");
-		System.out.println(userInfo.getPassword()+"---------------");
 		if(string2md5.equals(userInfo.getPassword())) {
 			session.setAttribute(CmsConstant.UserSessionKey, userInfo);
+			if (userInfo.getLocked()==1) {
+				return JsonResult.fail(10000, "该用户被禁用");
+			}
+			System.out.println(user.getIsMima()+"----------------------");
+			if("1".equals(user.getIsMima())) {
+				int maxAge = 1000*60*60*24;
+				CookieUtil.addCookie(response, "username", user.getUsername(), null, null, maxAge);
+			}
 			return JsonResult.success();
 		}
-		return JsonResult.fail(1000, "未知错误");
+		return JsonResult.fail(1000, "用户名或密码错误");
 	}
 	
 	/**
@@ -91,7 +96,9 @@ public class UserController {
 	 */
 	@RequestMapping("logout")
 	public Object logout(HttpServletResponse response,HttpSession session) {
+//		User userInfo = (User) session.getAttribute(CmsConstant.UserSessionKey);
 		session.removeAttribute(CmsConstant.UserSessionKey);
+		CookieUtil.addCookie(response, "username", null, null, null, 0);
 		return "redirect:/";
 	}
 	
@@ -105,7 +112,6 @@ public class UserController {
 	@RequestMapping(value="register",method=RequestMethod.POST)
 	@ResponseBody
 	public Object register(User user,HttpSession session) {
-		System.out.println(user+"===================");
 		boolean blank = StringUtil.isBlank(user.getUsername());
 		boolean blank1 = StringUtil.isBlank(user.getNickname());
 		boolean blank2 = StringUtil.isBlank(user.getPassword());
@@ -123,11 +129,8 @@ public class UserController {
 			return JsonResult.fail(500, "两次密码不一样");
 		}
 		boolean flag=userService.register(user);
-		System.out.println(flag+"============");
 		if(flag) {
-			System.out.println("走这里证明成功了");
 			session.setAttribute(CmsConstant.UserSessionKey, user);
-			System.out.println(session.toString());
 			return JsonResult.success();
 		}
 		return JsonResult.fail(500,"位置错误");
@@ -171,7 +174,6 @@ public class UserController {
 	@RequestMapping(value = "settings",method = RequestMethod.POST)
 	@ResponseBody
 	public Object settings(User user,HttpSession session) {
-		System.out.println(user+"===================");
 		user.setBirthday(java.sql.Date.valueOf(user.getBirthdayStr()));
 		boolean result = userService.update(user);
 		if(result) {
@@ -186,10 +188,8 @@ public class UserController {
 	public String comment(Comment comment,Model model,HttpSession session,
 			@RequestParam(value="pageNum",defaultValue="1")int pageNum,@RequestParam(value="pageSize",defaultValue="3") int pageSize) {
 		//通过session获得user信息
-		System.out.println(comment+"================");
 		User userInfo=(User) session.getAttribute(CmsConstant.UserSessionKey);
 		comment.setUserId(userInfo.getId());
-		System.out.println(comment+"-----------------");
 		
 		//根据user的id获得评论表的数据
 		PageInfo<Comment> pageInfo=commentService.getByUserId(comment,pageNum,pageSize);
@@ -211,5 +211,14 @@ public class UserController {
 		List<Channel> channelList = articleService.getChannelList();
 		model.addAttribute("channelList", channelList);
 		return "user/article";
+	}
+	
+	@RequestMapping(value = "isLogin",method = RequestMethod.POST)
+	public @ResponseBody Object isLogin(HttpSession session) {
+		Object userInfo = session.getAttribute(CmsConstant.UserSessionKey);
+		if(userInfo!=null) {
+			return JsonResult.success();
+		}
+		return JsonResult.fail(CmsConstant.unLoginErrorCode, "未登录");
 	}
 }

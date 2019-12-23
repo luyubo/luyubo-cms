@@ -29,7 +29,6 @@ public class SettingsController {
 	@RequestMapping("/settings/save")
 	@ResponseBody
 	public Object save(Model m,Settings settings) {
-		System.out.println(settings+"===========");
 		boolean flag=settingsService.save(settings);
 		if(flag) {
 			return JsonResult.success();

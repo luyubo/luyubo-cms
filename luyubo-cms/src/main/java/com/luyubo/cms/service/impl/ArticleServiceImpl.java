@@ -74,7 +74,7 @@ public class ArticleServiceImpl implements ArticleService {
 			article.setDeleted(0);
 			article.setCreated(new Date());
 			article.setUpdated(new Date());
-			article.setCommentcnt(0);
+			article.setCommentCnt(0);
 			article.setHits(0);
 			article.setHot(0);
 			if(article.getStatus()==0) {
@@ -141,8 +141,13 @@ public class ArticleServiceImpl implements ArticleService {
 	public boolean updateHits(Integer id) {
 		// TODO Auto-generated method stub
 		int i=articleDao.updateHit(id);
-		System.out.println("-------------"+i);
 		return i>0;
+	}
+
+	@Override
+	public boolean updateStatus3(Integer id) {
+		// TODO Auto-generated method stub
+		return articleDao.updateStatus3(id)>0;
 	}
 
 }

@@ -41,21 +41,61 @@ public class Article implements Serializable{
 
     private Date updated;
 
-    private int commentcnt;
+    private Integer commentCnt;
 
     private String content;
     
     private String statusIds;
     
     private String nickname;
+    
+    private Integer tousuCnt;
+
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", picture=" + picture + ", channelId=" + channelId
 				+ ", categoryId=" + categoryId + ", channelName=" + channelName + ", categoryName=" + categoryName
 				+ ", userId=" + userId + ", hits=" + hits + ", hot=" + hot + ", status=" + status + ", deleted="
-				+ deleted + ", created=" + created + ", updated=" + updated + ", commentcnt=" + commentcnt
-				+ ", content=" + content + ", statusIds=" + statusIds + "]";
+				+ deleted + ", created=" + created + ", updated=" + updated + ", commentCnt=" + commentCnt
+				+ ", content=" + content + ", statusIds=" + statusIds + ", nickname=" + nickname + ", tousuCnt="
+				+ tousuCnt + "]";
 	}
+
+
+	public Article() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public Article(Integer id, String title, String picture, Integer channelId, Integer categoryId, String channelName,
+			String categoryName, Integer userId, Integer hits, Integer hot, Integer status, Integer deleted,
+			Date created, Date updated, Integer commentCnt, String content, String statusIds, String nickname,
+			Integer tousuCnt) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.picture = picture;
+		this.channelId = channelId;
+		this.categoryId = categoryId;
+		this.channelName = channelName;
+		this.categoryName = categoryName;
+		this.userId = userId;
+		this.hits = hits;
+		this.hot = hot;
+		this.status = status;
+		this.deleted = deleted;
+		this.created = created;
+		this.updated = updated;
+		this.commentCnt = commentCnt;
+		this.content = content;
+		this.statusIds = statusIds;
+		this.nickname = nickname;
+		this.tousuCnt = tousuCnt;
+	}
+
+
 
 	public String getNickname() {
 		return nickname;
@@ -80,12 +120,27 @@ public class Article implements Serializable{
 	}
 
 
-
-	public void setCommentcnt(int commentcnt) {
-		this.commentcnt = commentcnt;
+	public Integer getCommentCnt() {
+		return commentCnt;
 	}
 
 
+
+	public void setCommentCnt(Integer commentCnt) {
+		this.commentCnt = commentCnt;
+	}
+
+
+
+	public Integer getTousuCnt() {
+		return tousuCnt;
+	}
+
+
+
+	public void setTousuCnt(Integer tousuCnt) {
+		this.tousuCnt = tousuCnt;
+	}
 
 	public Integer getId() {
         return id;
@@ -198,9 +253,6 @@ public class Article implements Serializable{
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
-    public int getCommentcnt() {
-		return commentcnt;
-	}
 
 	public String getContent() {
         return content;

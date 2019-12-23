@@ -38,7 +38,6 @@ public class CommentController {
 	@ResponseBody
 	public JsonResult add(Comment comment,HttpSession session) {
 		User userInfo=(User) session.getAttribute(CmsConstant.UserSessionKey);
-		System.out.println(CmsConstant.unLoginErrorCode+"------------");
 		if(userInfo==null) {
 			return JsonResult.fail(CmsConstant.unLoginErrorCode, "用户未登录");
 		}

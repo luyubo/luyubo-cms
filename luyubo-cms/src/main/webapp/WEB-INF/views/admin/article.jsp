@@ -39,6 +39,7 @@
       <th scope="col">所属频道</th>
       <th scope="col">所属分类</th>
       <th scope="col">是否热点</th>
+      <th scope="col">投诉次数</th>
       <th scope="col">审核状态</th>
       <th scope="col">发布时间</th>
       <th scope="col">操作</th>
@@ -53,12 +54,14 @@
 	      <td>${item.channelName }</td>
 	      <td>${item.categoryName }</td>
 	      <td>${item.hot>0?"是":"否"}</td>
-	      <td>${item.status==1?"已审核":item.status==0?"未审核":"审核未通过"}</td>
+	      <td>${item.tousuCnt}</td>
+	      <td>${item.status==1?"已审核":item.status==0?"未审核":item.status==3?"被禁用":"审核未通过"}</td>
 	      <td><fmt:formatDate value="${item.created }" pattern="yyyy-MM-dd HH:mm"/></td>
 	      <td>
 	      	<button type="button" class="btn btn-primary" onclick="check('${item.id}')">审核</button>
 	      	<button type="button" class="btn btn-primary" onclick="addHot('${item.id}')">加热</button>
 	      	<button type="button" class="btn btn-primary" onclick="view('${item.id}')">查看</button>
+	      	<button type="button" class="btn btn-primary" onclick="status('${item.id}')">禁用</button>
 	      </td>
 	    </tr>
    	</c:forEach>
@@ -126,6 +129,22 @@ function check(id){
 	$('#checkModal').modal('show');
 	$('#checkForm #id').val(id);
 }
+
+function status(id){
+	if(confirm("你确定要禁用id为"+id+"的文章吗?")){
+		$.post(
+				"/admin/article/update/status3",
+				{id:id},
+				function(res){
+					if(res.result){
+						reload();
+					}else{
+						alert(res.message);
+					}
+				}
+			)
+		}
+	}
 
 function toCheck(){
 	var data = $('#checkForm').serialize();

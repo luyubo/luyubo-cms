@@ -31,8 +31,7 @@ public class CommentServiceImpl implements CommentService{
 		comment.setCreated(format);
 		comment.setDeleted(0);
 		boolean flag=commentDao.insert(comment)>0;
-		int i=commentDao.selectCommentCnt(comment.getArticleId());
-		ArticleDao.updateCommentCnt(comment.getArticleId(),i);
+		ArticleDao.updateCommentCnt(comment.getArticleId());
 		return flag;
 	}
 

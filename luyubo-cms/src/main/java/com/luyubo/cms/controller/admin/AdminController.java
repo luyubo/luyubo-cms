@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
+import com.luyubo.cms.common.JsonResult;
 import com.luyubo.cms.pojo.Article;
 import com.luyubo.cms.pojo.Channel;
 import com.luyubo.cms.pojo.User;
@@ -122,5 +123,22 @@ public class AdminController {
 	@ResponseBody
 	public boolean addHot(Article article) {
 		return articleService.addHot(article.getId());
+	}
+	
+	/**
+	 * 修改文章状态为禁用
+	 * @param article
+	 * @return
+	 */
+	@RequestMapping("/article/update/status3")
+	@ResponseBody
+	public JsonResult updateArticleStatus3(Integer id) {
+		System.out.println(id+"====================");
+		boolean flag = articleService.updateStatus3(id);
+		System.out.println(flag);
+		if (flag) {
+			return JsonResult.success();
+		}
+		return JsonResult.fail(5000, "修改失败");
 	}
 }

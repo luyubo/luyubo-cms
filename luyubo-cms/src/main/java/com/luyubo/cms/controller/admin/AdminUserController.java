@@ -28,18 +28,13 @@ public class AdminUserController {
 	@RequestMapping("login")
 	@ResponseBody
 	public Object login(User user,HttpSession session) {
-		System.out.println(user);
 		boolean blank = StringUtil.isBlank(user.getUsername());
 		boolean blank1 = StringUtil.isBlank(user.getPassword());
-		System.out.println("======="+blank);
-		System.out.println("======="+blank1);
 		if(blank==false || blank1==false) {
-			System.out.println("登录用户名和密码为空失败--------");
 			return JsonResult.fail(1000, "用户名和密码不能为空");
 		}
 		//查询用户
 		User userInfo = userService.getByUsername(user.getUsername());
-		System.out.println(userInfo);
 		//判断是否管理员
 		if(userInfo==null) {
 			return JsonResult.fail(1000, "用户名或密码错误");
@@ -50,8 +45,6 @@ public class AdminUserController {
 		}
 		//判断密码
 		String string2md5 = CmsMd5Util.string2MD5(user.getPassword());
-		System.out.println(string2md5+"-----------");
-		System.out.println(userInfo.getPassword()+"================");
 		if(string2md5.equals(userInfo.getPassword())) {
 			session.setAttribute(CmsConstant.UserAdminSessionKey, userInfo);
 			return JsonResult.success();

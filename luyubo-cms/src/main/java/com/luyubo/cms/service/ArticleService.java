@@ -118,4 +118,11 @@ public interface ArticleService {
 	 */
 	boolean updateHits(Integer id);
 
+	/**
+	 * 修改文章状态为3
+	 * @param id
+	 * @return
+	 */
+	boolean updateStatus3(Integer id);
+
 }

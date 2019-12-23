@@ -33,7 +33,6 @@ public class SettingsService {
 	 * @return
 	 */
 	public boolean save(Settings settings) {
-		System.out.println(settings+"------------------");
 		Settings set = settingsDao.selectById(settings.getId());
 		set.setSite_domain(settings.getSite_domain());
 		set.setSite_name(settings.getSite_name());
