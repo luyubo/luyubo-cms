@@ -144,10 +144,4 @@ public class ArticleServiceImpl implements ArticleService {
 		return i>0;
 	}
 
-	@Override
-	public boolean updateStatus3(Integer id) {
-		// TODO Auto-generated method stub
-		return articleDao.updateStatus3(id)>0;
-	}
-
 }

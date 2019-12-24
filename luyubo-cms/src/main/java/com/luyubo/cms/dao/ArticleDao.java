@@ -137,11 +137,4 @@ public interface ArticleDao {
 	 * @return
 	 */
 	int updateTousuCnt(@Param("article")Article article);
-	
-	/**
-	 * 修改文章状态为3
-	 * @param id
-	 * @return
-	 */
-	int updateStatus3(@Param("id")Integer id);
 }

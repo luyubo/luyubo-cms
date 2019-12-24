@@ -19,7 +19,6 @@ import com.bawei.commons.utils.StringUtil;
 import com.github.pagehelper.PageInfo;
 import com.luyubo.cms.common.CmsConstant;
 import com.luyubo.cms.common.CmsMd5Util;
-import com.luyubo.cms.common.CookieUtil;
 import com.luyubo.cms.common.JsonResult;
 import com.luyubo.cms.pojo.Article;
 import com.luyubo.cms.pojo.Channel;
@@ -78,11 +77,6 @@ public class UserController {
 			if (userInfo.getLocked()==1) {
 				return JsonResult.fail(10000, "该用户被禁用");
 			}
-			System.out.println(user.getIsMima()+"----------------------");
-			if("1".equals(user.getIsMima())) {
-				int maxAge = 1000*60*60*24;
-				CookieUtil.addCookie(response, "username", user.getUsername(), null, null, maxAge);
-			}
 			return JsonResult.success();
 		}
 		return JsonResult.fail(1000, "用户名或密码错误");
@@ -98,7 +92,6 @@ public class UserController {
 	public Object logout(HttpServletResponse response,HttpSession session) {
 //		User userInfo = (User) session.getAttribute(CmsConstant.UserSessionKey);
 		session.removeAttribute(CmsConstant.UserSessionKey);
-		CookieUtil.addCookie(response, "username", null, null, null, 0);
 		return "redirect:/";
 	}
 	
@@ -211,14 +204,5 @@ public class UserController {
 		List<Channel> channelList = articleService.getChannelList();
 		model.addAttribute("channelList", channelList);
 		return "user/article";
-	}
-	
-	@RequestMapping(value = "isLogin",method = RequestMethod.POST)
-	public @ResponseBody Object isLogin(HttpSession session) {
-		Object userInfo = session.getAttribute(CmsConstant.UserSessionKey);
-		if(userInfo!=null) {
-			return JsonResult.success();
-		}
-		return JsonResult.fail(CmsConstant.unLoginErrorCode, "未登录");
 	}
 }

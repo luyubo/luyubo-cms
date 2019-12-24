@@ -85,10 +85,6 @@ public class IndexController {
 		//查询文章
 		Article article = articleService.selectById(id);
 		model.addAttribute("article", article);
-		//判断文章是否被禁用
-		if(article.getStatus()==3) {
-			return "user/error";
-		}
 		//修改文章点击量
 		articleService.updateHits(id);
 		//查询用户
