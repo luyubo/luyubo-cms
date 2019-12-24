@@ -2,6 +2,8 @@ package com.luyubo.cms.controller.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -112,6 +114,12 @@ public class AdminController {
 	@ResponseBody
 	public boolean updateArticleStatus(Article article) {
 		return articleService.updateStatus(article.getId(),article.getStatus());
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "admin/login";
 	}
 	
 	/**

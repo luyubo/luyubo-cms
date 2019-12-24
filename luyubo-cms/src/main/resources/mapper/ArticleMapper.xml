@@ -5,7 +5,7 @@
 	 <select id="select" resultType="Article">
 		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId,channel.name channelName,cate.name categoryName
 		from cms_article article,cms_channel channel,cms_category cate
-		WHERE article.channel_id=channel.id AND article.category_id=cate.id and article.deleted=0
+		WHERE article.channel_id=channel.id AND article.category_id=cate.id and article.deleted=0 and article.status in(1,3)
 		<if test="article.channelId!=null">
 			and article.channel_id = #{article.channelId}
 		</if>
@@ -32,7 +32,7 @@
 	<select id="getNewList" resultType="Article">
 		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId
 		from cms_article article
-		WHERE article.deleted=0 AND article.`status`=1
+		WHERE article.deleted=0 and article.status in(1,3)
 		order by article.created desc
 		limit ${num}
 	</select>
@@ -45,14 +45,14 @@
 	<select id="selectByHot" resultType="Article">
 		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId,user.nickname
 		from cms_article article,cms_user user
-		WHERE article.user_id=user.id and article.deleted=0 AND article.`status`=1 AND article.hot>0
+		WHERE article.user_id=user.id and article.deleted=0 and article.status in(1,3) AND article.hot>0
 		order by article.hot desc
 	</select>
 	
 	<select id="getListByChannelIdAndCateId" resultType="Article">
 		select article.*,article.channel_id channelId,article.user_id userId,article.category_id categoryId,user.nickname
 		from cms_article article,cms_user user
-		WHERE article.user_id=user.id and article.deleted=0 AND article.`status`=1 
+		WHERE article.user_id=user.id and article.deleted=0 and article.status in(1,3) 
 		AND article.channel_id=#{channelId}
 		<if test="cateId>0">
 			and category_id=#{cateId}
